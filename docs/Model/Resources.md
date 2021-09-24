@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **devices** | [**\Swagger\Client\Model\DeviceMapping[]**](DeviceMapping.md) | A list of devices to add to the container. | [optional] 
 **device_cgroup_rules** | **string[]** | a list of cgroup rules to apply to the container | [optional] 
 **device_requests** | [**\Swagger\Client\Model\DeviceRequest[]**](DeviceRequest.md) | A list of requests for devices to be sent to device drivers. | [optional] 
-**kernel_memory** | **int** | Kernel memory limit in bytes. | [optional] 
+**kernel_memory** | **int** | Kernel memory limit in bytes.  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;  &gt; **Deprecated**: This field is deprecated as the kernel 5.4 deprecated &gt; &#x60;kmem.limit_in_bytes&#x60;. | [optional] 
 **kernel_memory_tcp** | **int** | Hard limit for kernel TCP buffer memory (in bytes). | [optional] 
 **memory_reservation** | **int** | Memory soft limit in bytes. | [optional] 
 **memory_swap** | **int** | Total memory limit (memory + swap). Set as &#x60;-1&#x60; to enable unlimited swap. | [optional] 

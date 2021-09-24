@@ -27,6 +27,9 @@ Name | Type | Description | Notes
 **isolation** | **string** | Isolation technology of the containers running the service. (Windows only) | [optional] 
 **init** | **bool** | Run an init inside the container that forwards signals and reaps processes. This field is omitted if empty, and the default (as configured on the daemon) is used. | [optional] 
 **sysctls** | **map[string,string]** | Set kernel namedspaced parameters (sysctls) in the container. The Sysctls option on services accepts the same sysctls as the are supported on containers. Note that while the same sysctls are supported, no guarantees or checks are made about their suitability for a clustered environment, and it&#39;s up to the user to determine whether a given sysctl will work properly in a Service. | [optional] 
+**capability_add** | **string[]** | A list of kernel capabilities to add to the default set for the container. | [optional] 
+**capability_drop** | **string[]** | A list of kernel capabilities to drop from the default set for the container. | [optional] 
+**ulimits** | [**\Swagger\Client\Model\ResourcesUlimits[]**](ResourcesUlimits.md) | A list of resource limits to set in the container. For example: &#x60;{\&quot;Name\&quot;: \&quot;nofile\&quot;, \&quot;Soft\&quot;: 1024, \&quot;Hard\&quot;: 2048}&#x60;\&quot; | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

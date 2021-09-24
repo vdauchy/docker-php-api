@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.41) is used. For example, calling `/info` is the same as calling `/v1.41/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.40
+ * OpenAPI spec version: 1.41
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -66,9 +66,9 @@ class HostConfig extends Resources
         'volume_driver' => 'string',
         'volumes_from' => 'string[]',
         'mounts' => '\Swagger\Client\Model\Mount[]',
-        'capabilities' => 'string[]',
         'cap_add' => 'string[]',
         'cap_drop' => 'string[]',
+        'cgroupns_mode' => 'string',
         'dns' => 'string[]',
         'dns_options' => 'string[]',
         'dns_search' => 'string[]',
@@ -112,9 +112,9 @@ class HostConfig extends Resources
         'volume_driver' => null,
         'volumes_from' => null,
         'mounts' => null,
-        'capabilities' => null,
         'cap_add' => null,
         'cap_drop' => null,
+        'cgroupns_mode' => null,
         'dns' => null,
         'dns_options' => null,
         'dns_search' => null,
@@ -179,9 +179,9 @@ class HostConfig extends Resources
         'volume_driver' => 'VolumeDriver',
         'volumes_from' => 'VolumesFrom',
         'mounts' => 'Mounts',
-        'capabilities' => 'Capabilities',
         'cap_add' => 'CapAdd',
         'cap_drop' => 'CapDrop',
+        'cgroupns_mode' => 'CgroupnsMode',
         'dns' => 'Dns',
         'dns_options' => 'DnsOptions',
         'dns_search' => 'DnsSearch',
@@ -225,9 +225,9 @@ class HostConfig extends Resources
         'volume_driver' => 'setVolumeDriver',
         'volumes_from' => 'setVolumesFrom',
         'mounts' => 'setMounts',
-        'capabilities' => 'setCapabilities',
         'cap_add' => 'setCapAdd',
         'cap_drop' => 'setCapDrop',
+        'cgroupns_mode' => 'setCgroupnsMode',
         'dns' => 'setDns',
         'dns_options' => 'setDnsOptions',
         'dns_search' => 'setDnsSearch',
@@ -271,9 +271,9 @@ class HostConfig extends Resources
         'volume_driver' => 'getVolumeDriver',
         'volumes_from' => 'getVolumesFrom',
         'mounts' => 'getMounts',
-        'capabilities' => 'getCapabilities',
         'cap_add' => 'getCapAdd',
         'cap_drop' => 'getCapDrop',
+        'cgroupns_mode' => 'getCgroupnsMode',
         'dns' => 'getDns',
         'dns_options' => 'getDnsOptions',
         'dns_search' => 'getDnsSearch',
@@ -342,11 +342,26 @@ class HostConfig extends Resources
         return self::$swaggerModelName;
     }
 
+    const CGROUPNS_MODE__PRIVATE = 'private';
+    const CGROUPNS_MODE_HOST = 'host';
     const ISOLATION__DEFAULT = 'default';
     const ISOLATION_PROCESS = 'process';
     const ISOLATION_HYPERV = 'hyperv';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCgroupnsModeAllowableValues()
+    {
+        return [
+            self::CGROUPNS_MODE__PRIVATE,
+            self::CGROUPNS_MODE_HOST,
+        ];
+    }
     
     /**
      * Gets allowable values of the enum
@@ -384,9 +399,9 @@ class HostConfig extends Resources
         $this->container['volume_driver'] = isset($data['volume_driver']) ? $data['volume_driver'] : null;
         $this->container['volumes_from'] = isset($data['volumes_from']) ? $data['volumes_from'] : null;
         $this->container['mounts'] = isset($data['mounts']) ? $data['mounts'] : null;
-        $this->container['capabilities'] = isset($data['capabilities']) ? $data['capabilities'] : null;
         $this->container['cap_add'] = isset($data['cap_add']) ? $data['cap_add'] : null;
         $this->container['cap_drop'] = isset($data['cap_drop']) ? $data['cap_drop'] : null;
+        $this->container['cgroupns_mode'] = isset($data['cgroupns_mode']) ? $data['cgroupns_mode'] : null;
         $this->container['dns'] = isset($data['dns']) ? $data['dns'] : null;
         $this->container['dns_options'] = isset($data['dns_options']) ? $data['dns_options'] : null;
         $this->container['dns_search'] = isset($data['dns_search']) ? $data['dns_search'] : null;
@@ -422,6 +437,14 @@ class HostConfig extends Resources
     public function listInvalidProperties()
     {
         $invalidProperties = parent::listInvalidProperties();
+
+        $allowedValues = $this->getCgroupnsModeAllowableValues();
+        if (!is_null($this->container['cgroupns_mode']) && !in_array($this->container['cgroupns_mode'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'cgroupns_mode', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
 
         if (!is_null($this->container['shm_size']) && ($this->container['shm_size'] < 0)) {
             $invalidProperties[] = "invalid value for 'shm_size', must be bigger than or equal to 0.";
@@ -691,30 +714,6 @@ class HostConfig extends Resources
     }
 
     /**
-     * Gets capabilities
-     *
-     * @return string[]
-     */
-    public function getCapabilities()
-    {
-        return $this->container['capabilities'];
-    }
-
-    /**
-     * Sets capabilities
-     *
-     * @param string[] $capabilities A list of kernel capabilities to be available for container (this overrides the default set).  Conflicts with options 'CapAdd' and 'CapDrop'\"
-     *
-     * @return $this
-     */
-    public function setCapabilities($capabilities)
-    {
-        $this->container['capabilities'] = $capabilities;
-
-        return $this;
-    }
-
-    /**
      * Gets cap_add
      *
      * @return string[]
@@ -758,6 +757,39 @@ class HostConfig extends Resources
     public function setCapDrop($cap_drop)
     {
         $this->container['cap_drop'] = $cap_drop;
+
+        return $this;
+    }
+
+    /**
+     * Gets cgroupns_mode
+     *
+     * @return string
+     */
+    public function getCgroupnsMode()
+    {
+        return $this->container['cgroupns_mode'];
+    }
+
+    /**
+     * Sets cgroupns_mode
+     *
+     * @param string $cgroupns_mode cgroup namespace mode for the container. Possible values are:  - `\"private\"`: the container runs in its own private cgroup namespace - `\"host\"`: use the host system's cgroup namespace  If not specified, the daemon default is used, which can either be `\"private\"` or `\"host\"`, depending on daemon version, kernel support and configuration.
+     *
+     * @return $this
+     */
+    public function setCgroupnsMode($cgroupns_mode)
+    {
+        $allowedValues = $this->getCgroupnsModeAllowableValues();
+        if (!is_null($cgroupns_mode) && !in_array($cgroupns_mode, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'cgroupns_mode', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['cgroupns_mode'] = $cgroupns_mode;
 
         return $this;
     }

@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **spec** | [**\Swagger\Client\Model\ServiceSpec**](ServiceSpec.md) |  | [optional] 
 **endpoint** | [**\Swagger\Client\Model\ServiceEndpoint**](ServiceEndpoint.md) |  | [optional] 
 **update_status** | [**\Swagger\Client\Model\ServiceUpdateStatus**](ServiceUpdateStatus.md) |  | [optional] 
+**service_status** | [**\Swagger\Client\Model\ServiceServiceStatus**](ServiceServiceStatus.md) |  | [optional] 
+**job_status** | [**\Swagger\Client\Model\ServiceJobStatus**](ServiceJobStatus.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

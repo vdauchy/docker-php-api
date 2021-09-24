@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **hostname_path** | **string** |  | [optional] 
 **hosts_path** | **string** |  | [optional] 
 **log_path** | **string** |  | [optional] 
-**node** | **object** | TODO | [optional] 
 **name** | **string** |  | [optional] 
 **restart_count** | **int** |  | [optional] 
 **driver** | **string** |  | [optional] 

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **assigned_generic_resources** | [**\Swagger\Client\Model\GenericResources**](GenericResources.md) |  | [optional] 
 **status** | [**\Swagger\Client\Model\TaskStatus**](TaskStatus.md) |  | [optional] 
 **desired_state** | [**\Swagger\Client\Model\TaskState**](TaskState.md) |  | [optional] 
+**job_iteration** | [**\Swagger\Client\Model\ObjectVersion**](ObjectVersion.md) | If the Service this Task belongs to is a job-mode service, contains the JobIteration of the Service this Task was created for. Absent if the Task was created for a Replicated or Global Service. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

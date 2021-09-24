@@ -1,6 +1,6 @@
 # Swagger\Client\PluginApi
 
-All URIs are relative to *http://localhost/v1.40*
+All URIs are relative to *http://localhost/v1.41*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

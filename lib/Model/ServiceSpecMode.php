@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.41) is used. For example, calling `/info` is the same as calling `/v1.41/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.40
+ * OpenAPI spec version: 1.41
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -59,7 +59,9 @@ class ServiceSpecMode implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'replicated' => '\Swagger\Client\Model\ServiceSpecModeReplicated',
-        'global' => 'object'
+        'global' => 'object',
+        'replicated_job' => '\Swagger\Client\Model\ServiceSpecModeReplicatedJob',
+        'global_job' => 'object'
     ];
 
     /**
@@ -69,7 +71,9 @@ class ServiceSpecMode implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'replicated' => null,
-        'global' => null
+        'global' => null,
+        'replicated_job' => null,
+        'global_job' => null
     ];
 
     /**
@@ -100,7 +104,9 @@ class ServiceSpecMode implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'replicated' => 'Replicated',
-        'global' => 'Global'
+        'global' => 'Global',
+        'replicated_job' => 'ReplicatedJob',
+        'global_job' => 'GlobalJob'
     ];
 
     /**
@@ -110,7 +116,9 @@ class ServiceSpecMode implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'replicated' => 'setReplicated',
-        'global' => 'setGlobal'
+        'global' => 'setGlobal',
+        'replicated_job' => 'setReplicatedJob',
+        'global_job' => 'setGlobalJob'
     ];
 
     /**
@@ -120,7 +128,9 @@ class ServiceSpecMode implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'replicated' => 'getReplicated',
-        'global' => 'getGlobal'
+        'global' => 'getGlobal',
+        'replicated_job' => 'getReplicatedJob',
+        'global_job' => 'getGlobalJob'
     ];
 
     /**
@@ -185,6 +195,8 @@ class ServiceSpecMode implements ModelInterface, ArrayAccess
     {
         $this->container['replicated'] = isset($data['replicated']) ? $data['replicated'] : null;
         $this->container['global'] = isset($data['global']) ? $data['global'] : null;
+        $this->container['replicated_job'] = isset($data['replicated_job']) ? $data['replicated_job'] : null;
+        $this->container['global_job'] = isset($data['global_job']) ? $data['global_job'] : null;
     }
 
     /**
@@ -255,6 +267,54 @@ class ServiceSpecMode implements ModelInterface, ArrayAccess
     public function setGlobal($global)
     {
         $this->container['global'] = $global;
+
+        return $this;
+    }
+
+    /**
+     * Gets replicated_job
+     *
+     * @return \Swagger\Client\Model\ServiceSpecModeReplicatedJob
+     */
+    public function getReplicatedJob()
+    {
+        return $this->container['replicated_job'];
+    }
+
+    /**
+     * Sets replicated_job
+     *
+     * @param \Swagger\Client\Model\ServiceSpecModeReplicatedJob $replicated_job replicated_job
+     *
+     * @return $this
+     */
+    public function setReplicatedJob($replicated_job)
+    {
+        $this->container['replicated_job'] = $replicated_job;
+
+        return $this;
+    }
+
+    /**
+     * Gets global_job
+     *
+     * @return object
+     */
+    public function getGlobalJob()
+    {
+        return $this->container['global_job'];
+    }
+
+    /**
+     * Sets global_job
+     *
+     * @param object $global_job The mode used for services which run a task to the completed state on each valid node.
+     *
+     * @return $this
+     */
+    public function setGlobalJob($global_job)
+    {
+        $this->container['global_job'] = $global_job;
 
         return $this;
     }

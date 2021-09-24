@@ -1,6 +1,6 @@
 # Swagger\Client\ServiceApi
 
-All URIs are relative to *http://localhost/v1.40*
+All URIs are relative to *http://localhost/v1.41*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -157,7 +157,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **serviceList**
-> \Swagger\Client\Model\Service[] serviceList($filters)
+> \Swagger\Client\Model\Service[] serviceList($filters, $status)
 
 List services
 
@@ -172,9 +172,10 @@ $apiInstance = new Swagger\Client\Api\ServiceApi(
     new GuzzleHttp\Client()
 );
 $filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the services list.  Available filters:  - `id=<service id>` - `label=<service label>` - `mode=[\"replicated\"|\"global\"]` - `name=<service name>`
+$status = true; // bool | Include service status, with count of running and desired tasks.
 
 try {
-    $result = $apiInstance->serviceList($filters);
+    $result = $apiInstance->serviceList($filters, $status);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ServiceApi->serviceList: ', $e->getMessage(), PHP_EOL;
@@ -187,6 +188,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the services list.  Available filters:  - &#x60;id&#x3D;&lt;service id&gt;&#x60; - &#x60;label&#x3D;&lt;service label&gt;&#x60; - &#x60;mode&#x3D;[\&quot;replicated\&quot;|\&quot;global\&quot;]&#x60; - &#x60;name&#x3D;&lt;service name&gt;&#x60; | [optional]
+ **status** | **bool**| Include service status, with count of running and desired tasks. | [optional]
 
 ### Return type
 

@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.41) is used. For example, calling `/info` is the same as calling `/v1.41/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.40
+ * OpenAPI spec version: 1.41
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -66,7 +66,6 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'driver' => 'string',
         'driver_status' => 'string[][]',
         'docker_root_dir' => 'string',
-        'system_status' => 'string[][]',
         'plugins' => '\Swagger\Client\Model\PluginsInfo',
         'memory_limit' => 'bool',
         'swap_limit' => 'bool',
@@ -86,9 +85,11 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'system_time' => 'string',
         'logging_driver' => 'string',
         'cgroup_driver' => 'string',
+        'cgroup_version' => 'string',
         'n_events_listener' => 'int',
         'kernel_version' => 'string',
         'operating_system' => 'string',
+        'os_version' => 'string',
         'os_type' => 'string',
         'architecture' => 'string',
         'ncpu' => 'int',
@@ -116,6 +117,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'init_commit' => '\Swagger\Client\Model\Commit',
         'security_options' => 'string[]',
         'product_license' => 'string',
+        'default_address_pools' => '\Swagger\Client\Model\SystemInfoDefaultAddressPools[]',
         'warnings' => 'string[]'
     ];
 
@@ -134,7 +136,6 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'driver' => null,
         'driver_status' => null,
         'docker_root_dir' => null,
-        'system_status' => null,
         'plugins' => null,
         'memory_limit' => null,
         'swap_limit' => null,
@@ -154,9 +155,11 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'system_time' => null,
         'logging_driver' => null,
         'cgroup_driver' => null,
+        'cgroup_version' => null,
         'n_events_listener' => null,
         'kernel_version' => null,
         'operating_system' => null,
+        'os_version' => null,
         'os_type' => null,
         'architecture' => null,
         'ncpu' => null,
@@ -184,6 +187,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'init_commit' => null,
         'security_options' => null,
         'product_license' => null,
+        'default_address_pools' => null,
         'warnings' => null
     ];
 
@@ -223,7 +227,6 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'driver' => 'Driver',
         'driver_status' => 'DriverStatus',
         'docker_root_dir' => 'DockerRootDir',
-        'system_status' => 'SystemStatus',
         'plugins' => 'Plugins',
         'memory_limit' => 'MemoryLimit',
         'swap_limit' => 'SwapLimit',
@@ -243,9 +246,11 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'system_time' => 'SystemTime',
         'logging_driver' => 'LoggingDriver',
         'cgroup_driver' => 'CgroupDriver',
+        'cgroup_version' => 'CgroupVersion',
         'n_events_listener' => 'NEventsListener',
         'kernel_version' => 'KernelVersion',
         'operating_system' => 'OperatingSystem',
+        'os_version' => 'OSVersion',
         'os_type' => 'OSType',
         'architecture' => 'Architecture',
         'ncpu' => 'NCPU',
@@ -273,6 +278,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'init_commit' => 'InitCommit',
         'security_options' => 'SecurityOptions',
         'product_license' => 'ProductLicense',
+        'default_address_pools' => 'DefaultAddressPools',
         'warnings' => 'Warnings'
     ];
 
@@ -291,7 +297,6 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'driver' => 'setDriver',
         'driver_status' => 'setDriverStatus',
         'docker_root_dir' => 'setDockerRootDir',
-        'system_status' => 'setSystemStatus',
         'plugins' => 'setPlugins',
         'memory_limit' => 'setMemoryLimit',
         'swap_limit' => 'setSwapLimit',
@@ -311,9 +316,11 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'system_time' => 'setSystemTime',
         'logging_driver' => 'setLoggingDriver',
         'cgroup_driver' => 'setCgroupDriver',
+        'cgroup_version' => 'setCgroupVersion',
         'n_events_listener' => 'setNEventsListener',
         'kernel_version' => 'setKernelVersion',
         'operating_system' => 'setOperatingSystem',
+        'os_version' => 'setOsVersion',
         'os_type' => 'setOsType',
         'architecture' => 'setArchitecture',
         'ncpu' => 'setNcpu',
@@ -341,6 +348,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'init_commit' => 'setInitCommit',
         'security_options' => 'setSecurityOptions',
         'product_license' => 'setProductLicense',
+        'default_address_pools' => 'setDefaultAddressPools',
         'warnings' => 'setWarnings'
     ];
 
@@ -359,7 +367,6 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'driver' => 'getDriver',
         'driver_status' => 'getDriverStatus',
         'docker_root_dir' => 'getDockerRootDir',
-        'system_status' => 'getSystemStatus',
         'plugins' => 'getPlugins',
         'memory_limit' => 'getMemoryLimit',
         'swap_limit' => 'getSwapLimit',
@@ -379,9 +386,11 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'system_time' => 'getSystemTime',
         'logging_driver' => 'getLoggingDriver',
         'cgroup_driver' => 'getCgroupDriver',
+        'cgroup_version' => 'getCgroupVersion',
         'n_events_listener' => 'getNEventsListener',
         'kernel_version' => 'getKernelVersion',
         'operating_system' => 'getOperatingSystem',
+        'os_version' => 'getOsVersion',
         'os_type' => 'getOsType',
         'architecture' => 'getArchitecture',
         'ncpu' => 'getNcpu',
@@ -409,6 +418,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'init_commit' => 'getInitCommit',
         'security_options' => 'getSecurityOptions',
         'product_license' => 'getProductLicense',
+        'default_address_pools' => 'getDefaultAddressPools',
         'warnings' => 'getWarnings'
     ];
 
@@ -456,6 +466,8 @@ class SystemInfo implements ModelInterface, ArrayAccess
     const CGROUP_DRIVER_CGROUPFS = 'cgroupfs';
     const CGROUP_DRIVER_SYSTEMD = 'systemd';
     const CGROUP_DRIVER_NONE = 'none';
+    const CGROUP_VERSION__1 = '1';
+    const CGROUP_VERSION__2 = '2';
     const ISOLATION__DEFAULT = 'default';
     const ISOLATION_HYPERV = 'hyperv';
     const ISOLATION_PROCESS = 'process';
@@ -473,6 +485,19 @@ class SystemInfo implements ModelInterface, ArrayAccess
             self::CGROUP_DRIVER_CGROUPFS,
             self::CGROUP_DRIVER_SYSTEMD,
             self::CGROUP_DRIVER_NONE,
+        ];
+    }
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCgroupVersionAllowableValues()
+    {
+        return [
+            self::CGROUP_VERSION__1,
+            self::CGROUP_VERSION__2,
         ];
     }
     
@@ -515,7 +540,6 @@ class SystemInfo implements ModelInterface, ArrayAccess
         $this->container['driver'] = isset($data['driver']) ? $data['driver'] : null;
         $this->container['driver_status'] = isset($data['driver_status']) ? $data['driver_status'] : null;
         $this->container['docker_root_dir'] = isset($data['docker_root_dir']) ? $data['docker_root_dir'] : null;
-        $this->container['system_status'] = isset($data['system_status']) ? $data['system_status'] : null;
         $this->container['plugins'] = isset($data['plugins']) ? $data['plugins'] : null;
         $this->container['memory_limit'] = isset($data['memory_limit']) ? $data['memory_limit'] : null;
         $this->container['swap_limit'] = isset($data['swap_limit']) ? $data['swap_limit'] : null;
@@ -535,9 +559,11 @@ class SystemInfo implements ModelInterface, ArrayAccess
         $this->container['system_time'] = isset($data['system_time']) ? $data['system_time'] : null;
         $this->container['logging_driver'] = isset($data['logging_driver']) ? $data['logging_driver'] : null;
         $this->container['cgroup_driver'] = isset($data['cgroup_driver']) ? $data['cgroup_driver'] : 'cgroupfs';
+        $this->container['cgroup_version'] = isset($data['cgroup_version']) ? $data['cgroup_version'] : '1';
         $this->container['n_events_listener'] = isset($data['n_events_listener']) ? $data['n_events_listener'] : null;
         $this->container['kernel_version'] = isset($data['kernel_version']) ? $data['kernel_version'] : null;
         $this->container['operating_system'] = isset($data['operating_system']) ? $data['operating_system'] : null;
+        $this->container['os_version'] = isset($data['os_version']) ? $data['os_version'] : null;
         $this->container['os_type'] = isset($data['os_type']) ? $data['os_type'] : null;
         $this->container['architecture'] = isset($data['architecture']) ? $data['architecture'] : null;
         $this->container['ncpu'] = isset($data['ncpu']) ? $data['ncpu'] : null;
@@ -565,6 +591,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         $this->container['init_commit'] = isset($data['init_commit']) ? $data['init_commit'] : null;
         $this->container['security_options'] = isset($data['security_options']) ? $data['security_options'] : null;
         $this->container['product_license'] = isset($data['product_license']) ? $data['product_license'] : null;
+        $this->container['default_address_pools'] = isset($data['default_address_pools']) ? $data['default_address_pools'] : null;
         $this->container['warnings'] = isset($data['warnings']) ? $data['warnings'] : null;
     }
 
@@ -581,6 +608,14 @@ class SystemInfo implements ModelInterface, ArrayAccess
         if (!is_null($this->container['cgroup_driver']) && !in_array($this->container['cgroup_driver'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value for 'cgroup_driver', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getCgroupVersionAllowableValues();
+        if (!is_null($this->container['cgroup_version']) && !in_array($this->container['cgroup_version'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'cgroup_version', must be one of '%s'",
                 implode("', '", $allowedValues)
             );
         }
@@ -825,30 +860,6 @@ class SystemInfo implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets system_status
-     *
-     * @return string[][]
-     */
-    public function getSystemStatus()
-    {
-        return $this->container['system_status'];
-    }
-
-    /**
-     * Sets system_status
-     *
-     * @param string[][] $system_status Status information about this node (standalone Swarm API).  <p><br /></p>  > **Note**: The information returned in this field is only propagated > by the Swarm standalone API, and is empty (`null`) when using > built-in swarm mode.
-     *
-     * @return $this
-     */
-    public function setSystemStatus($system_status)
-    {
-        $this->container['system_status'] = $system_status;
-
-        return $this;
-    }
-
-    /**
      * Gets plugins
      *
      * @return \Swagger\Client\Model\PluginsInfo
@@ -933,7 +944,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
     /**
      * Sets kernel_memory
      *
-     * @param bool $kernel_memory Indicates if the host has kernel memory limit support enabled.
+     * @param bool $kernel_memory Indicates if the host has kernel memory limit support enabled.  <p><br /></p>  > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated > `kmem.limit_in_bytes`.
      *
      * @return $this
      */
@@ -1314,6 +1325,39 @@ class SystemInfo implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets cgroup_version
+     *
+     * @return string
+     */
+    public function getCgroupVersion()
+    {
+        return $this->container['cgroup_version'];
+    }
+
+    /**
+     * Sets cgroup_version
+     *
+     * @param string $cgroup_version The version of the cgroup.
+     *
+     * @return $this
+     */
+    public function setCgroupVersion($cgroup_version)
+    {
+        $allowedValues = $this->getCgroupVersionAllowableValues();
+        if (!is_null($cgroup_version) && !in_array($cgroup_version, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'cgroup_version', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['cgroup_version'] = $cgroup_version;
+
+        return $this;
+    }
+
+    /**
      * Gets n_events_listener
      *
      * @return int
@@ -1381,6 +1425,30 @@ class SystemInfo implements ModelInterface, ArrayAccess
     public function setOperatingSystem($operating_system)
     {
         $this->container['operating_system'] = $operating_system;
+
+        return $this;
+    }
+
+    /**
+     * Gets os_version
+     *
+     * @return string
+     */
+    public function getOsVersion()
+    {
+        return $this->container['os_version'];
+    }
+
+    /**
+     * Sets os_version
+     *
+     * @param string $os_version Version of the host's operating system  <p><br /></p>  > **Note**: The information returned in this field, including its > very existence, and the formatting of values, should not be considered > stable, and may change without notice.
+     *
+     * @return $this
+     */
+    public function setOsVersion($os_version)
+    {
+        $this->container['os_version'] = $os_version;
 
         return $this;
     }
@@ -1734,7 +1802,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
     /**
      * Sets cluster_store
      *
-     * @param string $cluster_store URL of the distributed storage backend.   The storage backend is used for multihost networking (to store network and endpoint information) and by the node discovery mechanism.  <p><br /></p>  > **Note**: This field is only propagated when using standalone Swarm > mode, and overlay networking using an external k/v store. Overlay > networks with Swarm mode enabled use the built-in raft store, and > this field will be empty.
+     * @param string $cluster_store URL of the distributed storage backend.   The storage backend is used for multihost networking (to store network and endpoint information) and by the node discovery mechanism.  <p><br /></p>  > **Deprecated**: This field is only propagated when using standalone Swarm > mode, and overlay networking using an external k/v store. Overlay > networks with Swarm mode enabled use the built-in raft store, and > this field will be empty.
      *
      * @return $this
      */
@@ -1758,7 +1826,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
     /**
      * Sets cluster_advertise
      *
-     * @param string $cluster_advertise The network endpoint that the Engine advertises for the purpose of node discovery. ClusterAdvertise is a `host:port` combination on which the daemon is reachable by other hosts.  <p><br /></p>  > **Note**: This field is only propagated when using standalone Swarm > mode, and overlay networking using an external k/v store. Overlay > networks with Swarm mode enabled use the built-in raft store, and > this field will be empty.
+     * @param string $cluster_advertise The network endpoint that the Engine advertises for the purpose of node discovery. ClusterAdvertise is a `host:port` combination on which the daemon is reachable by other hosts.  <p><br /></p>  > **Deprecated**: This field is only propagated when using standalone Swarm > mode, and overlay networking using an external k/v store. Overlay > networks with Swarm mode enabled use the built-in raft store, and > this field will be empty.
      *
      * @return $this
      */
@@ -2038,6 +2106,30 @@ class SystemInfo implements ModelInterface, ArrayAccess
     public function setProductLicense($product_license)
     {
         $this->container['product_license'] = $product_license;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_address_pools
+     *
+     * @return \Swagger\Client\Model\SystemInfoDefaultAddressPools[]
+     */
+    public function getDefaultAddressPools()
+    {
+        return $this->container['default_address_pools'];
+    }
+
+    /**
+     * Sets default_address_pools
+     *
+     * @param \Swagger\Client\Model\SystemInfoDefaultAddressPools[] $default_address_pools List of custom default address pools for local networks, which can be specified in the daemon.json file or dockerd option.  Example: a Base \"10.10.0.0/16\" with Size 24 will define the set of 256 10.10.[0-255].0/24 address pools.
+     *
+     * @return $this
+     */
+    public function setDefaultAddressPools($default_address_pools)
+    {
+        $this->container['default_address_pools'] = $default_address_pools;
 
         return $this;
     }

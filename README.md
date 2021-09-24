@@ -1,9 +1,9 @@
 # SwaggerClient-php
-The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.41) is used. For example, calling `/info` is the same as calling `/v1.41/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
 
 This PHP package is automatically generated by the [Swagger Codegen](https://github.com/swagger-api/swagger-codegen) project:
 
-- API version: 1.40
+- API version: 1.41
 - Build package: io.swagger.codegen.languages.PhpClientCodegen
 
 ## Requirements
@@ -75,7 +75,7 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/v1.40*
+All URIs are relative to *http://localhost/v1.41*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -260,6 +260,7 @@ Class | Method | HTTP request | Description
  - [IndexInfo](docs/Model/IndexInfo.md)
  - [InlineResponse400](docs/Model/InlineResponse400.md)
  - [JoinTokens](docs/Model/JoinTokens.md)
+ - [Limit](docs/Model/Limit.md)
  - [LocalNodeState](docs/Model/LocalNodeState.md)
  - [ManagerStatus](docs/Model/ManagerStatus.md)
  - [Mount](docs/Model/Mount.md)
@@ -319,9 +320,12 @@ Class | Method | HTTP request | Description
  - [ServiceCreateResponse](docs/Model/ServiceCreateResponse.md)
  - [ServiceEndpoint](docs/Model/ServiceEndpoint.md)
  - [ServiceEndpointVirtualIPs](docs/Model/ServiceEndpointVirtualIPs.md)
+ - [ServiceJobStatus](docs/Model/ServiceJobStatus.md)
+ - [ServiceServiceStatus](docs/Model/ServiceServiceStatus.md)
  - [ServiceSpec](docs/Model/ServiceSpec.md)
  - [ServiceSpecMode](docs/Model/ServiceSpecMode.md)
  - [ServiceSpecModeReplicated](docs/Model/ServiceSpecModeReplicated.md)
+ - [ServiceSpecModeReplicatedJob](docs/Model/ServiceSpecModeReplicatedJob.md)
  - [ServiceSpecRollbackConfig](docs/Model/ServiceSpecRollbackConfig.md)
  - [ServiceSpecUpdateConfig](docs/Model/ServiceSpecUpdateConfig.md)
  - [ServiceUpdateResponse](docs/Model/ServiceUpdateResponse.md)
@@ -342,6 +346,7 @@ Class | Method | HTTP request | Description
  - [SystemEventsResponse](docs/Model/SystemEventsResponse.md)
  - [SystemEventsResponseActor](docs/Model/SystemEventsResponseActor.md)
  - [SystemInfo](docs/Model/SystemInfo.md)
+ - [SystemInfoDefaultAddressPools](docs/Model/SystemInfoDefaultAddressPools.md)
  - [SystemVersion](docs/Model/SystemVersion.md)
  - [SystemVersionComponents](docs/Model/SystemVersionComponents.md)
  - [SystemVersionPlatform](docs/Model/SystemVersionPlatform.md)

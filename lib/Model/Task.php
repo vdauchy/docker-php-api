@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.41) is used. For example, calling `/info` is the same as calling `/v1.41/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.40
+ * OpenAPI spec version: 1.41
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -69,7 +69,8 @@ class Task implements ModelInterface, ArrayAccess
         'node_id' => 'string',
         'assigned_generic_resources' => '\Swagger\Client\Model\GenericResources',
         'status' => '\Swagger\Client\Model\TaskStatus',
-        'desired_state' => '\Swagger\Client\Model\TaskState'
+        'desired_state' => '\Swagger\Client\Model\TaskState',
+        'job_iteration' => '\Swagger\Client\Model\ObjectVersion'
     ];
 
     /**
@@ -90,7 +91,8 @@ class Task implements ModelInterface, ArrayAccess
         'node_id' => null,
         'assigned_generic_resources' => null,
         'status' => null,
-        'desired_state' => null
+        'desired_state' => null,
+        'job_iteration' => null
     ];
 
     /**
@@ -132,7 +134,8 @@ class Task implements ModelInterface, ArrayAccess
         'node_id' => 'NodeID',
         'assigned_generic_resources' => 'AssignedGenericResources',
         'status' => 'Status',
-        'desired_state' => 'DesiredState'
+        'desired_state' => 'DesiredState',
+        'job_iteration' => 'JobIteration'
     ];
 
     /**
@@ -153,7 +156,8 @@ class Task implements ModelInterface, ArrayAccess
         'node_id' => 'setNodeId',
         'assigned_generic_resources' => 'setAssignedGenericResources',
         'status' => 'setStatus',
-        'desired_state' => 'setDesiredState'
+        'desired_state' => 'setDesiredState',
+        'job_iteration' => 'setJobIteration'
     ];
 
     /**
@@ -174,7 +178,8 @@ class Task implements ModelInterface, ArrayAccess
         'node_id' => 'getNodeId',
         'assigned_generic_resources' => 'getAssignedGenericResources',
         'status' => 'getStatus',
-        'desired_state' => 'getDesiredState'
+        'desired_state' => 'getDesiredState',
+        'job_iteration' => 'getJobIteration'
     ];
 
     /**
@@ -250,6 +255,7 @@ class Task implements ModelInterface, ArrayAccess
         $this->container['assigned_generic_resources'] = isset($data['assigned_generic_resources']) ? $data['assigned_generic_resources'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['desired_state'] = isset($data['desired_state']) ? $data['desired_state'] : null;
+        $this->container['job_iteration'] = isset($data['job_iteration']) ? $data['job_iteration'] : null;
     }
 
     /**
@@ -584,6 +590,30 @@ class Task implements ModelInterface, ArrayAccess
     public function setDesiredState($desired_state)
     {
         $this->container['desired_state'] = $desired_state;
+
+        return $this;
+    }
+
+    /**
+     * Gets job_iteration
+     *
+     * @return \Swagger\Client\Model\ObjectVersion
+     */
+    public function getJobIteration()
+    {
+        return $this->container['job_iteration'];
+    }
+
+    /**
+     * Sets job_iteration
+     *
+     * @param \Swagger\Client\Model\ObjectVersion $job_iteration If the Service this Task belongs to is a job-mode service, contains the JobIteration of the Service this Task was created for. Absent if the Task was created for a Replicated or Global Service.
+     *
+     * @return $this
+     */
+    public function setJobIteration($job_iteration)
+    {
+        $this->container['job_iteration'] = $job_iteration;
 
         return $this;
     }

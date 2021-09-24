@@ -1,6 +1,6 @@
 # Swagger\Client\ContainerApi
 
-All URIs are relative to *http://localhost/v1.40*
+All URIs are relative to *http://localhost/v1.41*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -958,11 +958,11 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **containerStats**
-> object containerStats($id, $stream)
+> object containerStats($id, $stream, $one_shot)
 
 Get container stats based on resource usage
 
-This endpoint returns a live stream of a container’s resource usage statistics.  The `precpu_stats` is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the `cpu_stats` field.  If either `precpu_stats.online_cpus` or `cpu_stats.online_cpus` is nil then for compatibility with older daemons the length of the corresponding `cpu_usage.percpu_usage` array should be used.  To calculate the values shown by the `stats` command of the docker cli tool the following formulas can be used: * used_memory = `memory_stats.usage - memory_stats.stats.cache` * available_memory = `memory_stats.limit` * Memory usage % = `(used_memory / available_memory) * 100.0` * cpu_delta = `cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage` * system_cpu_delta = `cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage` * number_cpus = `lenght(cpu_stats.cpu_usage.percpu_usage)` or `cpu_stats.online_cpus` * CPU usage % = `(cpu_delta / system_cpu_delta) * number_cpus * 100.0`
+This endpoint returns a live stream of a container’s resource usage statistics.  The `precpu_stats` is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the `cpu_stats` field.  If either `precpu_stats.online_cpus` or `cpu_stats.online_cpus` is nil then for compatibility with older daemons the length of the corresponding `cpu_usage.percpu_usage` array should be used.  On a cgroup v2 host, the following fields are not set * `blkio_stats`: all fields other than `io_service_bytes_recursive` * `cpu_stats`: `cpu_usage.percpu_usage` * `memory_stats`: `max_usage` and `failcnt` Also, `memory_stats.stats` fields are incompatible with cgroup v1.  To calculate the values shown by the `stats` command of the docker cli tool the following formulas can be used: * used_memory = `memory_stats.usage - memory_stats.stats.cache` * available_memory = `memory_stats.limit` * Memory usage % = `(used_memory / available_memory) * 100.0` * cpu_delta = `cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage` * system_cpu_delta = `cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage` * number_cpus = `lenght(cpu_stats.cpu_usage.percpu_usage)` or `cpu_stats.online_cpus` * CPU usage % = `(cpu_delta / system_cpu_delta) * number_cpus * 100.0`
 
 ### Example
 ```php
@@ -976,9 +976,10 @@ $apiInstance = new Swagger\Client\Api\ContainerApi(
 );
 $id = "id_example"; // string | ID or name of the container
 $stream = true; // bool | Stream the output. If false, the stats will be output once and then it will disconnect.
+$one_shot = false; // bool | Only get a single stat instead of waiting for 2 cycles. Must be used with `stream=false`.
 
 try {
-    $result = $apiInstance->containerStats($id, $stream);
+    $result = $apiInstance->containerStats($id, $stream, $one_shot);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerStats: ', $e->getMessage(), PHP_EOL;
@@ -992,6 +993,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of the container |
  **stream** | **bool**| Stream the output. If false, the stats will be output once and then it will disconnect. | [optional] [default to true]
+ **one_shot** | **bool**| Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;. | [optional] [default to false]
 
 ### Return type
 
