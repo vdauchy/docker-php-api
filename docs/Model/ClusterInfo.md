@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **spec** | [**\Swagger\Client\Model\SwarmSpec**](SwarmSpec.md) |  | [optional] 
 **tls_info** | [**\Swagger\Client\Model\TLSInfo**](TLSInfo.md) |  | [optional] 
 **root_rotation_in_progress** | **bool** | Whether there is currently a root CA rotation in progress for the swarm | [optional] 
+**data_path_port** | **int** | DataPathPort specifies the data path port number for data traffic. Acceptable port range is 1024 to 49151. If no port is set or is set to 0, the default port (4789) is used. | [optional] 
 **default_addr_pool** | **string[]** | Default Address Pool specifies default subnet pools for global scope networks. | [optional] 
 **subnet_size** | **int** | SubnetSize specifies the subnet size of the networks created from the default subnet pool. | [optional] 
 

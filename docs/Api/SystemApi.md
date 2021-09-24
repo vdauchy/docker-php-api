@@ -1,6 +1,6 @@
 # Swagger\Client\SystemApi
 
-All URIs are relative to *http://localhost/v1.39*
+All URIs are relative to *http://localhost/v1.40*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**systemEvents**](SystemApi.md#systemEvents) | **GET** /events | Monitor events
 [**systemInfo**](SystemApi.md#systemInfo) | **GET** /info | Get system information
 [**systemPing**](SystemApi.md#systemPing) | **GET** /_ping | Ping
+[**systemPingHead**](SystemApi.md#systemPingHead) | **HEAD** /_ping | Ping
 [**systemVersion**](SystemApi.md#systemVersion) | **GET** /version | Get version
 
 
@@ -223,6 +224,51 @@ try {
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SystemApi->systemPing: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**string**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/plain
+ - **Accept**: text/plain
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **systemPingHead**
+> string systemPingHead()
+
+Ping
+
+This is a dummy endpoint you can use to test if the server is accessible.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$apiInstance = new Swagger\Client\Api\SystemApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+
+try {
+    $result = $apiInstance->systemPingHead();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SystemApi->systemPingHead: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```

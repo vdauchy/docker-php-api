@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.39
+ * OpenAPI spec version: 1.40
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -60,6 +60,7 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'string',
         'advertise_addr' => 'string',
         'data_path_addr' => 'string',
+        'data_path_port' => 'int',
         'default_addr_pool' => 'string[]',
         'force_new_cluster' => 'bool',
         'subnet_size' => 'int',
@@ -75,6 +76,7 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => null,
         'advertise_addr' => null,
         'data_path_addr' => null,
+        'data_path_port' => 'uint32',
         'default_addr_pool' => null,
         'force_new_cluster' => null,
         'subnet_size' => 'uint32',
@@ -111,6 +113,7 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'ListenAddr',
         'advertise_addr' => 'AdvertiseAddr',
         'data_path_addr' => 'DataPathAddr',
+        'data_path_port' => 'DataPathPort',
         'default_addr_pool' => 'DefaultAddrPool',
         'force_new_cluster' => 'ForceNewCluster',
         'subnet_size' => 'SubnetSize',
@@ -126,6 +129,7 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'setListenAddr',
         'advertise_addr' => 'setAdvertiseAddr',
         'data_path_addr' => 'setDataPathAddr',
+        'data_path_port' => 'setDataPathPort',
         'default_addr_pool' => 'setDefaultAddrPool',
         'force_new_cluster' => 'setForceNewCluster',
         'subnet_size' => 'setSubnetSize',
@@ -141,6 +145,7 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'getListenAddr',
         'advertise_addr' => 'getAdvertiseAddr',
         'data_path_addr' => 'getDataPathAddr',
+        'data_path_port' => 'getDataPathPort',
         'default_addr_pool' => 'getDefaultAddrPool',
         'force_new_cluster' => 'getForceNewCluster',
         'subnet_size' => 'getSubnetSize',
@@ -210,6 +215,7 @@ class Body1 implements ModelInterface, ArrayAccess
         $this->container['listen_addr'] = isset($data['listen_addr']) ? $data['listen_addr'] : null;
         $this->container['advertise_addr'] = isset($data['advertise_addr']) ? $data['advertise_addr'] : null;
         $this->container['data_path_addr'] = isset($data['data_path_addr']) ? $data['data_path_addr'] : null;
+        $this->container['data_path_port'] = isset($data['data_path_port']) ? $data['data_path_port'] : null;
         $this->container['default_addr_pool'] = isset($data['default_addr_pool']) ? $data['default_addr_pool'] : null;
         $this->container['force_new_cluster'] = isset($data['force_new_cluster']) ? $data['force_new_cluster'] : null;
         $this->container['subnet_size'] = isset($data['subnet_size']) ? $data['subnet_size'] : null;
@@ -308,6 +314,30 @@ class Body1 implements ModelInterface, ArrayAccess
     public function setDataPathAddr($data_path_addr)
     {
         $this->container['data_path_addr'] = $data_path_addr;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_path_port
+     *
+     * @return int
+     */
+    public function getDataPathPort()
+    {
+        return $this->container['data_path_port'];
+    }
+
+    /**
+     * Sets data_path_port
+     *
+     * @param int $data_path_port DataPathPort specifies the data path port number for data traffic. Acceptable port range is 1024 to 49151. if no port is set or is set to 0, default port 4789 will be used.
+     *
+     * @return $this
+     */
+    public function setDataPathPort($data_path_port)
+    {
+        $this->container['data_path_port'] = $data_path_port;
 
         return $this;
     }

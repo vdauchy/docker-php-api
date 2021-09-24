@@ -1,6 +1,6 @@
 # Swagger\Client\ImageApi
 
-All URIs are relative to *http://localhost/v1.39*
+All URIs are relative to *http://localhost/v1.40*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -73,7 +73,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **imageBuild**
-> imageBuild($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target)
+> imageBuild($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target, $outputs)
 
 Build an image
 
@@ -115,9 +115,10 @@ $content_type = "application/x-tar"; // string |
 $x_registry_config = "x_registry_config_example"; // string | This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  ``` {   \"docker.example.com\": {     \"username\": \"janedoe\",     \"password\": \"hunter2\"   },   \"https://index.docker.io/v1/\": {     \"username\": \"mobydock\",     \"password\": \"conta1n3rize14\"   } } ```  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a `https://` prefix and a `/v1/` suffix even though Docker will prefer to use the v2 registry API.
 $platform = ""; // string | Platform in the format os[/arch[/variant]]
 $target = ""; // string | Target build stage
+$outputs = ""; // string | BuildKit output configuration
 
 try {
-    $apiInstance->imageBuild($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target);
+    $apiInstance->imageBuild($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target, $outputs);
 } catch (Exception $e) {
     echo 'Exception when calling ImageApi->imageBuild: ', $e->getMessage(), PHP_EOL;
 }
@@ -154,6 +155,7 @@ Name | Type | Description  | Notes
  **x_registry_config** | **string**| This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. | [optional]
  **platform** | **string**| Platform in the format os[/arch[/variant]] | [optional] [default to ]
  **target** | **string**| Target build stage | [optional] [default to ]
+ **outputs** | **string**| BuildKit output configuration | [optional] [default to ]
 
 ### Return type
 

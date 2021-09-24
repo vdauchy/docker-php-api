@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.39
+ * OpenAPI spec version: 1.40
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -75,6 +75,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'cpu_cfs_quota' => 'bool',
         'cpu_shares' => 'bool',
         'cpu_set' => 'bool',
+        'pids_limit' => 'bool',
         'oom_kill_disable' => 'bool',
         'i_pv4_forwarding' => 'bool',
         'bridge_nf_iptables' => 'bool',
@@ -142,6 +143,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'cpu_cfs_quota' => null,
         'cpu_shares' => null,
         'cpu_set' => null,
+        'pids_limit' => null,
         'oom_kill_disable' => null,
         'i_pv4_forwarding' => null,
         'bridge_nf_iptables' => null,
@@ -230,6 +232,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'cpu_cfs_quota' => 'CpuCfsQuota',
         'cpu_shares' => 'CPUShares',
         'cpu_set' => 'CPUSet',
+        'pids_limit' => 'PidsLimit',
         'oom_kill_disable' => 'OomKillDisable',
         'i_pv4_forwarding' => 'IPv4Forwarding',
         'bridge_nf_iptables' => 'BridgeNfIptables',
@@ -297,6 +300,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'cpu_cfs_quota' => 'setCpuCfsQuota',
         'cpu_shares' => 'setCpuShares',
         'cpu_set' => 'setCpuSet',
+        'pids_limit' => 'setPidsLimit',
         'oom_kill_disable' => 'setOomKillDisable',
         'i_pv4_forwarding' => 'setIPv4Forwarding',
         'bridge_nf_iptables' => 'setBridgeNfIptables',
@@ -364,6 +368,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'cpu_cfs_quota' => 'getCpuCfsQuota',
         'cpu_shares' => 'getCpuShares',
         'cpu_set' => 'getCpuSet',
+        'pids_limit' => 'getPidsLimit',
         'oom_kill_disable' => 'getOomKillDisable',
         'i_pv4_forwarding' => 'getIPv4Forwarding',
         'bridge_nf_iptables' => 'getBridgeNfIptables',
@@ -450,6 +455,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
 
     const CGROUP_DRIVER_CGROUPFS = 'cgroupfs';
     const CGROUP_DRIVER_SYSTEMD = 'systemd';
+    const CGROUP_DRIVER_NONE = 'none';
     const ISOLATION__DEFAULT = 'default';
     const ISOLATION_HYPERV = 'hyperv';
     const ISOLATION_PROCESS = 'process';
@@ -466,6 +472,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         return [
             self::CGROUP_DRIVER_CGROUPFS,
             self::CGROUP_DRIVER_SYSTEMD,
+            self::CGROUP_DRIVER_NONE,
         ];
     }
     
@@ -517,6 +524,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
         $this->container['cpu_cfs_quota'] = isset($data['cpu_cfs_quota']) ? $data['cpu_cfs_quota'] : null;
         $this->container['cpu_shares'] = isset($data['cpu_shares']) ? $data['cpu_shares'] : null;
         $this->container['cpu_set'] = isset($data['cpu_set']) ? $data['cpu_set'] : null;
+        $this->container['pids_limit'] = isset($data['pids_limit']) ? $data['pids_limit'] : null;
         $this->container['oom_kill_disable'] = isset($data['oom_kill_disable']) ? $data['oom_kill_disable'] : null;
         $this->container['i_pv4_forwarding'] = isset($data['i_pv4_forwarding']) ? $data['i_pv4_forwarding'] : null;
         $this->container['bridge_nf_iptables'] = isset($data['bridge_nf_iptables']) ? $data['bridge_nf_iptables'] : null;
@@ -1028,6 +1036,30 @@ class SystemInfo implements ModelInterface, ArrayAccess
     public function setCpuSet($cpu_set)
     {
         $this->container['cpu_set'] = $cpu_set;
+
+        return $this;
+    }
+
+    /**
+     * Gets pids_limit
+     *
+     * @return bool
+     */
+    public function getPidsLimit()
+    {
+        return $this->container['pids_limit'];
+    }
+
+    /**
+     * Sets pids_limit
+     *
+     * @param bool $pids_limit Indicates if the host kernel has PID limit support enabled.
+     *
+     * @return $this
+     */
+    public function setPidsLimit($pids_limit)
+    {
+        $this->container['pids_limit'] = $pids_limit;
 
         return $this;
     }
@@ -1975,7 +2007,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
     /**
      * Sets security_options
      *
-     * @param string[] $security_options List of security features that are enabled on the daemon, such as apparmor, seccomp, SELinux, and user-namespaces (userns).  Additional configuration options for each security feature may be present, and are included as a comma-separated list of key/value pairs.
+     * @param string[] $security_options List of security features that are enabled on the daemon, such as apparmor, seccomp, SELinux, user-namespaces (userns), and rootless.  Additional configuration options for each security feature may be present, and are included as a comma-separated list of key/value pairs.
      *
      * @return $this
      */

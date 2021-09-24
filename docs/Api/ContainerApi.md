@@ -1,6 +1,6 @@
 # Swagger\Client\ContainerApi
 
-All URIs are relative to *http://localhost/v1.39*
+All URIs are relative to *http://localhost/v1.40*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -621,7 +621,7 @@ $apiInstance = new Swagger\Client\Api\ContainerApi(
     new GuzzleHttp\Client()
 );
 $id = "id_example"; // string | ID or name of the container
-$follow = false; // bool | Return the logs as a stream.  This will return a `101` HTTP response with a `Connection: upgrade` header, then hijack the HTTP connection to send raw output. For more information about hijacking and the stream format, [see the documentation for the attach endpoint](#operation/ContainerAttach).
+$follow = false; // bool | Keep connection after returning logs.
 $stdout = false; // bool | Return logs from `stdout`
 $stderr = false; // bool | Return logs from `stderr`
 $since = 0; // int | Only return logs since this time, as a UNIX timestamp
@@ -643,7 +643,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of the container |
- **follow** | **bool**| Return the logs as a stream.  This will return a &#x60;101&#x60; HTTP response with a &#x60;Connection: upgrade&#x60; header, then hijack the HTTP connection to send raw output. For more information about hijacking and the stream format, [see the documentation for the attach endpoint](#operation/ContainerAttach). | [optional] [default to false]
+ **follow** | **bool**| Keep connection after returning logs. | [optional] [default to false]
  **stdout** | **bool**| Return logs from &#x60;stdout&#x60; | [optional] [default to false]
  **stderr** | **bool**| Return logs from &#x60;stderr&#x60; | [optional] [default to false]
  **since** | **int**| Only return logs since this time, as a UNIX timestamp | [optional] [default to 0]

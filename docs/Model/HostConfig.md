@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **volume_driver** | **string** | Driver that this container uses to mount volumes. | [optional] 
 **volumes_from** | **string[]** | A list of volumes to inherit from another container, specified in the form &#x60;&lt;container name&gt;[:&lt;ro|rw&gt;]&#x60;. | [optional] 
 **mounts** | [**\Swagger\Client\Model\Mount[]**](Mount.md) | Specification for mounts to be added to the container. | [optional] 
+**capabilities** | **string[]** | A list of kernel capabilities to be available for container (this overrides the default set).  Conflicts with options &#39;CapAdd&#39; and &#39;CapDrop&#39;\&quot; | [optional] 
 **cap_add** | **string[]** | A list of kernel capabilities to add to the container. Conflicts with option &#39;Capabilities&#39;. | [optional] 
 **cap_drop** | **string[]** | A list of kernel capabilities to drop from the container. Conflicts with option &#39;Capabilities&#39;. | [optional] 
 **dns** | **string[]** | A list of DNS servers for the container to use. | [optional] 

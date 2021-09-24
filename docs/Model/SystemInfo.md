@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **cpu_cfs_quota** | **bool** | Indicates if CPU CFS(Completely Fair Scheduler) quota is supported by the host. | [optional] 
 **cpu_shares** | **bool** | Indicates if CPU Shares limiting is supported by the host. | [optional] 
 **cpu_set** | **bool** | Indicates if CPUsets (cpuset.cpus, cpuset.mems) are supported by the host.  See [cpuset(7)](https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt) | [optional] 
+**pids_limit** | **bool** | Indicates if the host kernel has PID limit support enabled. | [optional] 
 **oom_kill_disable** | **bool** | Indicates if OOM killer disable is supported on the host. | [optional] 
 **i_pv4_forwarding** | **bool** | Indicates IPv4 forwarding is enabled. | [optional] 
 **bridge_nf_iptables** | **bool** | Indicates if &#x60;bridge-nf-call-iptables&#x60; is available on the host. | [optional] 
@@ -59,7 +60,7 @@ Name | Type | Description | Notes
 **containerd_commit** | [**\Swagger\Client\Model\Commit**](Commit.md) |  | [optional] 
 **runc_commit** | [**\Swagger\Client\Model\Commit**](Commit.md) |  | [optional] 
 **init_commit** | [**\Swagger\Client\Model\Commit**](Commit.md) |  | [optional] 
-**security_options** | **string[]** | List of security features that are enabled on the daemon, such as apparmor, seccomp, SELinux, and user-namespaces (userns).  Additional configuration options for each security feature may be present, and are included as a comma-separated list of key/value pairs. | [optional] 
+**security_options** | **string[]** | List of security features that are enabled on the daemon, such as apparmor, seccomp, SELinux, user-namespaces (userns), and rootless.  Additional configuration options for each security feature may be present, and are included as a comma-separated list of key/value pairs. | [optional] 
 **product_license** | **string** | Reports a summary of the product license on the daemon.  If a commercial license has been applied to the daemon, information such as number of nodes, and expiration are included. | [optional] 
 **warnings** | **string[]** | List of warnings / informational messages about missing features, or issues related to the daemon configuration.  These messages can be printed by the client as information to the user. | [optional] 
 

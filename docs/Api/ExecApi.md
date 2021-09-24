@@ -1,6 +1,6 @@
 # Swagger\Client\ExecApi
 
-All URIs are relative to *http://localhost/v1.39*
+All URIs are relative to *http://localhost/v1.40*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **name** | **string** |  | [optional] 
 **restart_count** | **int** |  | [optional] 
 **driver** | **string** |  | [optional] 
+**platform** | **string** |  | [optional] 
 **mount_label** | **string** |  | [optional] 
 **process_label** | **string** |  | [optional] 
 **app_armor_profile** | **string** |  | [optional] 

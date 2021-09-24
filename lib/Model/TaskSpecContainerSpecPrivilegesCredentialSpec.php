@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.39
+ * OpenAPI spec version: 1.40
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -58,6 +58,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'config' => 'string',
         'file' => 'string',
         'registry' => 'string'
     ];
@@ -68,6 +69,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'config' => null,
         'file' => null,
         'registry' => null
     ];
@@ -99,6 +101,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
      * @var string[]
      */
     protected static $attributeMap = [
+        'config' => 'Config',
         'file' => 'File',
         'registry' => 'Registry'
     ];
@@ -109,6 +112,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
      * @var string[]
      */
     protected static $setters = [
+        'config' => 'setConfig',
         'file' => 'setFile',
         'registry' => 'setRegistry'
     ];
@@ -119,6 +123,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
      * @var string[]
      */
     protected static $getters = [
+        'config' => 'getConfig',
         'file' => 'getFile',
         'registry' => 'getRegistry'
     ];
@@ -183,6 +188,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
      */
     public function __construct(array $data = null)
     {
+        $this->container['config'] = isset($data['config']) ? $data['config'] : null;
         $this->container['file'] = isset($data['file']) ? $data['file'] : null;
         $this->container['registry'] = isset($data['registry']) ? $data['registry'] : null;
     }
@@ -212,6 +218,30 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
 
 
     /**
+     * Gets config
+     *
+     * @return string
+     */
+    public function getConfig()
+    {
+        return $this->container['config'];
+    }
+
+    /**
+     * Sets config
+     *
+     * @param string $config Load credential spec from a Swarm Config with the given ID. The specified config must also be present in the Configs field with the Runtime property set.  <p><br /></p>   > **Note**: `CredentialSpec.File`, `CredentialSpec.Registry`, > and `CredentialSpec.Config` are mutually exclusive.
+     *
+     * @return $this
+     */
+    public function setConfig($config)
+    {
+        $this->container['config'] = $config;
+
+        return $this;
+    }
+
+    /**
      * Gets file
      *
      * @return string
@@ -224,7 +254,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
     /**
      * Sets file
      *
-     * @param string $file Load credential spec from this file. The file is read by the daemon, and must be present in the `CredentialSpecs` subdirectory in the docker data directory, which defaults to `C:\\ProgramData\\Docker\\` on Windows.  For example, specifying `spec.json` loads `C:\\ProgramData\\Docker\\CredentialSpecs\\spec.json`.  <p><br /></p>  > **Note**: `CredentialSpec.File` and `CredentialSpec.Registry` > are mutually exclusive.
+     * @param string $file Load credential spec from this file. The file is read by the daemon, and must be present in the `CredentialSpecs` subdirectory in the docker data directory, which defaults to `C:\\ProgramData\\Docker\\` on Windows.  For example, specifying `spec.json` loads `C:\\ProgramData\\Docker\\CredentialSpecs\\spec.json`.  <p><br /></p>  > **Note**: `CredentialSpec.File`, `CredentialSpec.Registry`, > and `CredentialSpec.Config` are mutually exclusive.
      *
      * @return $this
      */
@@ -248,7 +278,7 @@ class TaskSpecContainerSpecPrivilegesCredentialSpec implements ModelInterface, A
     /**
      * Sets registry
      *
-     * @param string $registry Load credential spec from this value in the Windows registry. The specified registry value must be located in:  `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Virtualization\\Containers\\CredentialSpecs`  <p><br /></p>   > **Note**: `CredentialSpec.File` and `CredentialSpec.Registry` > are mutually exclusive.
+     * @param string $registry Load credential spec from this value in the Windows registry. The specified registry value must be located in:  `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Virtualization\\Containers\\CredentialSpecs`  <p><br /></p>   > **Note**: `CredentialSpec.File`, `CredentialSpec.Registry`, > and `CredentialSpec.Config` are mutually exclusive.
      *
      * @return $this
      */

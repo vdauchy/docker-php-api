@@ -1,6 +1,6 @@
 # Swagger\Client\TaskApi
 
-All URIs are relative to *http://localhost/v1.39*
+All URIs are relative to *http://localhost/v1.40*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -108,7 +108,7 @@ No authorization required
 
 Get task logs
 
-Get `stdout` and `stderr` logs from a task. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `json-file` or `journald` logging drivers.
+Get `stdout` and `stderr` logs from a task. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers.
 
 ### Example
 ```php
@@ -122,7 +122,7 @@ $apiInstance = new Swagger\Client\Api\TaskApi(
 );
 $id = "id_example"; // string | ID of the task
 $details = false; // bool | Show task context and extra details provided to logs.
-$follow = false; // bool | Return the logs as a stream.  This will return a `101` HTTP response with a `Connection: upgrade` header, then hijack the HTTP connection to send raw output. For more information about hijacking and the stream format, [see the documentation for the attach endpoint](#operation/ContainerAttach).
+$follow = false; // bool | Keep connection after returning logs.
 $stdout = false; // bool | Return logs from `stdout`
 $stderr = false; // bool | Return logs from `stderr`
 $since = 0; // int | Only return logs since this time, as a UNIX timestamp
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID of the task |
  **details** | **bool**| Show task context and extra details provided to logs. | [optional] [default to false]
- **follow** | **bool**| Return the logs as a stream.  This will return a &#x60;101&#x60; HTTP response with a &#x60;Connection: upgrade&#x60; header, then hijack the HTTP connection to send raw output. For more information about hijacking and the stream format, [see the documentation for the attach endpoint](#operation/ContainerAttach). | [optional] [default to false]
+ **follow** | **bool**| Keep connection after returning logs. | [optional] [default to false]
  **stdout** | **bool**| Return logs from &#x60;stdout&#x60; | [optional] [default to false]
  **stderr** | **bool**| Return logs from &#x60;stderr&#x60; | [optional] [default to false]
  **since** | **int**| Only return logs since this time, as a UNIX timestamp | [optional] [default to 0]
@@ -162,7 +162,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/plain
- - **Accept**: application/vnd.docker.raw-stream, application/json
+ - **Accept**: application/json, text/plain
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 

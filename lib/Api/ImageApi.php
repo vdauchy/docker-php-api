@@ -12,9 +12,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.40) is used. For example, calling `/info` is the same as calling `/v1.40/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.39
+ * OpenAPI spec version: 1.40
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -403,14 +403,15 @@ class ImageApi
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      * @param  string $target Target build stage (optional, default to )
+     * @param  string $outputs BuildKit output configuration (optional, default to )
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function imageBuild($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '')
+    public function imageBuild($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '', $outputs = '')
     {
-        $this->imageBuildWithHttpInfo($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target);
+        $this->imageBuildWithHttpInfo($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target, $outputs);
     }
 
     /**
@@ -444,15 +445,16 @@ class ImageApi
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      * @param  string $target Target build stage (optional, default to )
+     * @param  string $outputs BuildKit output configuration (optional, default to )
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function imageBuildWithHttpInfo($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '')
+    public function imageBuildWithHttpInfo($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '', $outputs = '')
     {
         $returnType = '';
-        $request = $this->imageBuildRequest($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target);
+        $request = $this->imageBuildRequest($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target, $outputs);
 
         try {
             $options = $this->createHttpClientOption();
@@ -538,13 +540,14 @@ class ImageApi
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      * @param  string $target Target build stage (optional, default to )
+     * @param  string $outputs BuildKit output configuration (optional, default to )
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageBuildAsync($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '')
+    public function imageBuildAsync($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '', $outputs = '')
     {
-        return $this->imageBuildAsyncWithHttpInfo($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target)
+        return $this->imageBuildAsyncWithHttpInfo($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target, $outputs)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -583,14 +586,15 @@ class ImageApi
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      * @param  string $target Target build stage (optional, default to )
+     * @param  string $outputs BuildKit output configuration (optional, default to )
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageBuildAsyncWithHttpInfo($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '')
+    public function imageBuildAsyncWithHttpInfo($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '', $outputs = '')
     {
         $returnType = '';
-        $request = $this->imageBuildRequest($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target);
+        $request = $this->imageBuildRequest($input_stream, $dockerfile, $t, $extrahosts, $remote, $q, $nocache, $cachefrom, $pull, $rm, $forcerm, $memory, $memswap, $cpushares, $cpusetcpus, $cpuperiod, $cpuquota, $buildargs, $shmsize, $squash, $labels, $networkmode, $content_type, $x_registry_config, $platform, $target, $outputs);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -644,11 +648,12 @@ class ImageApi
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      * @param  string $target Target build stage (optional, default to )
+     * @param  string $outputs BuildKit output configuration (optional, default to )
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function imageBuildRequest($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '')
+    protected function imageBuildRequest($input_stream = null, $dockerfile = 'Dockerfile', $t = null, $extrahosts = null, $remote = null, $q = 'false', $nocache = 'false', $cachefrom = null, $pull = null, $rm = 'true', $forcerm = 'false', $memory = null, $memswap = null, $cpushares = null, $cpusetcpus = null, $cpuperiod = null, $cpuquota = null, $buildargs = null, $shmsize = null, $squash = null, $labels = null, $networkmode = null, $content_type = 'application/x-tar', $x_registry_config = null, $platform = '', $target = '', $outputs = '')
     {
 
         $resourcePath = '/build';
@@ -749,6 +754,10 @@ class ImageApi
         // query params
         if ($target !== null) {
             $queryParams['target'] = ObjectSerializer::toQueryValue($target);
+        }
+        // query params
+        if ($outputs !== null) {
+            $queryParams['outputs'] = ObjectSerializer::toQueryValue($outputs);
         }
         // header params
         if ($content_type !== null) {
