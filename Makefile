@@ -1,14 +1,15 @@
 VERSION=$(shell ./version.sh)
+GIT_USER=vdauchy
+GIT_REPO=docker-php-api
 
 .PHONY: help
 help: ## This help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 .DEFAULT_GOAL := help
 
-generate := .temp
-generate: $(generate) ## Generate code to temporary directory.
-$(generate):
-	@mkdir .temp
+TEMP_DIR := .temp
+$(TEMP_DIR):
+	@mkdir $(TEMP_DIR)
 	@docker run \
 		--rm \
 		--user $(shell id -u):$(shell id -g) \
@@ -16,11 +17,14 @@ $(generate):
 		swaggerapi/swagger-codegen-cli generate \
 		-i https://docs.docker.com/engine/api/v$(VERSION).yaml \
 		-l php \
-		-o /gen/.temp
+		-o /gen/$(TEMP_DIR)
+
+.PHONY: generate
+generate: $(TEMP_DIR) ## Generate code to temporary directory.
 
 .PHONY: clean
 clean: ## Delete temporary files.
-	@rm -rf .temp
+	@rm -rf $(TEMP_DIR)
 
 .PHONY: nuke
 nuke: ## Delete ALL generated files.
@@ -33,9 +37,12 @@ nuke: ## Delete ALL generated files.
 
 .PHONY: import
 import: generate ## Import generated files to project's root.
-	@cp -r $(shell pwd)/.temp/SwaggerClient-php/* $(shell pwd)
-	@sed -i 's/GIT_USER_ID/vdauchy/g' composer.json
-	@sed -i 's/GIT_REPO_ID/docker-php-api/g' composer.json
+	@cp -r $(TEMP_DIR)/SwaggerClient-php/* .
+	@sed -i 's/GIT_USER_ID/$(GIT_USER)/g' composer.json
+	@sed -i 's/GIT_REPO_ID/$(GIT_REPO)/g' composer.json
+	@sed -i 's/GIT_USER_ID/$(GIT_USER)/g' README.md
+	@sed -i 's/GIT_REPO_ID/$(GIT_REPO)/g' README.md
+	@sed -i 's/*@dev/^$(VERSION)/g' README.md
 
 .PHONY: update
 update: | nuke generate import clean  ## Update the code (ie: generate, import and clean).
