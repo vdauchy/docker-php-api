@@ -1,6 +1,6 @@
 # Swagger\Client\ConfigApi
 
-All URIs are relative to *http://localhost/v1.38*
+All URIs are relative to *http://localhost/v1.39*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -166,7 +166,7 @@ $apiInstance = new Swagger\Client\Api\ConfigApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the configs list. Available filters:  - `id=<config id>` - `label=<key> or label=<key>=value` - `name=<config name>` - `names=<config name>`
+$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the configs list.  Available filters:  - `id=<config id>` - `label=<key> or label=<key>=value` - `name=<config name>` - `names=<config name>`
 
 try {
     $result = $apiInstance->configList($filters);
@@ -181,7 +181,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the configs list. Available filters:  - &#x60;id&#x3D;&lt;config id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;config name&gt;&#x60; - &#x60;names&#x3D;&lt;config name&gt;&#x60; | [optional]
+ **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the configs list.  Available filters:  - &#x60;id&#x3D;&lt;config id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;config name&gt;&#x60; - &#x60;names&#x3D;&lt;config name&gt;&#x60; | [optional]
 
 ### Return type
 

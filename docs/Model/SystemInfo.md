@@ -41,8 +41,8 @@ Name | Type | Description | Notes
 **index_server_address** | **string** | Address / URL of the index server that is used for image search, and as a default for user authentication for Docker Hub and Docker Cloud. | [optional] [default to 'https://index.docker.io/v1/']
 **registry_config** | [**\Swagger\Client\Model\RegistryServiceConfig**](RegistryServiceConfig.md) |  | [optional] 
 **generic_resources** | [**\Swagger\Client\Model\GenericResources**](GenericResources.md) |  | [optional] 
-**http_proxy** | **string** | HTTP-proxy configured for the daemon. This value is obtained from the [&#x60;HTTP_PROXY&#x60;](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.  Containers do not automatically inherit this configuration. | [optional] 
-**https_proxy** | **string** | HTTPS-proxy configured for the daemon. This value is obtained from the [&#x60;HTTPS_PROXY&#x60;](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.  Containers do not automatically inherit this configuration. | [optional] 
+**http_proxy** | **string** | HTTP-proxy configured for the daemon. This value is obtained from the [&#x60;HTTP_PROXY&#x60;](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable. Credentials ([user info component](https://tools.ietf.org/html/rfc3986#section-3.2.1)) in the proxy URL are masked in the API response.  Containers do not automatically inherit this configuration. | [optional] 
+**https_proxy** | **string** | HTTPS-proxy configured for the daemon. This value is obtained from the [&#x60;HTTPS_PROXY&#x60;](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable. Credentials ([user info component](https://tools.ietf.org/html/rfc3986#section-3.2.1)) in the proxy URL are masked in the API response.  Containers do not automatically inherit this configuration. | [optional] 
 **no_proxy** | **string** | Comma-separated list of domain extensions for which no proxy should be used. This value is obtained from the [&#x60;NO_PROXY&#x60;](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.  Containers do not automatically inherit this configuration. | [optional] 
 **name** | **string** | Hostname of the host. | [optional] 
 **labels** | **string[]** | User-defined labels (key/value metadata) as set on the daemon.  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;  &gt; **Note**: When part of a Swarm, nodes can both have _daemon_ labels, &gt; set through the daemon configuration, and _node_ labels, set from a &gt; manager node in the Swarm. Node labels are not included in this &gt; field. Node labels can be retrieved using the &#x60;/nodes/(id)&#x60; endpoint &gt; on a manager node in the Swarm. | [optional] 
@@ -60,6 +60,8 @@ Name | Type | Description | Notes
 **runc_commit** | [**\Swagger\Client\Model\Commit**](Commit.md) |  | [optional] 
 **init_commit** | [**\Swagger\Client\Model\Commit**](Commit.md) |  | [optional] 
 **security_options** | **string[]** | List of security features that are enabled on the daemon, such as apparmor, seccomp, SELinux, and user-namespaces (userns).  Additional configuration options for each security feature may be present, and are included as a comma-separated list of key/value pairs. | [optional] 
+**product_license** | **string** | Reports a summary of the product license on the daemon.  If a commercial license has been applied to the daemon, information such as number of nodes, and expiration are included. | [optional] 
+**warnings** | **string[]** | List of warnings / informational messages about missing features, or issues related to the daemon configuration.  These messages can be printed by the client as information to the user. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

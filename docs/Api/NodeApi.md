@@ -1,6 +1,6 @@
 # Swagger\Client\NodeApi
 
-All URIs are relative to *http://localhost/v1.38*
+All URIs are relative to *http://localhost/v1.39*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

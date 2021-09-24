@@ -12,9 +12,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.38) is used. For example, calling `/info` is the same as calling `/v1.38/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.38
+ * OpenAPI spec version: 1.39
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -92,14 +92,17 @@ class ImageApi
      *
      * Delete builder cache
      *
+     * @param  int $keep_storage Amount of disk space in bytes to keep for cache (optional)
+     * @param  bool $all Remove all types of build cache (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon&#39;s time, during which build cache was not used, in Go&#39;s duration format (e.g., &#39;24h&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; (optional)
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Swagger\Client\Model\BuildPruneResponse
      */
-    public function buildPrune()
+    public function buildPrune($keep_storage = null, $all = null, $filters = null)
     {
-        list($response) = $this->buildPruneWithHttpInfo();
+        list($response) = $this->buildPruneWithHttpInfo($keep_storage, $all, $filters);
         return $response;
     }
 
@@ -108,15 +111,18 @@ class ImageApi
      *
      * Delete builder cache
      *
+     * @param  int $keep_storage Amount of disk space in bytes to keep for cache (optional)
+     * @param  bool $all Remove all types of build cache (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon&#39;s time, during which build cache was not used, in Go&#39;s duration format (e.g., &#39;24h&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; (optional)
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Swagger\Client\Model\BuildPruneResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function buildPruneWithHttpInfo()
+    public function buildPruneWithHttpInfo($keep_storage = null, $all = null, $filters = null)
     {
         $returnType = '\Swagger\Client\Model\BuildPruneResponse';
-        $request = $this->buildPruneRequest();
+        $request = $this->buildPruneRequest($keep_storage, $all, $filters);
 
         try {
             $options = $this->createHttpClientOption();
@@ -190,13 +196,16 @@ class ImageApi
      *
      * Delete builder cache
      *
+     * @param  int $keep_storage Amount of disk space in bytes to keep for cache (optional)
+     * @param  bool $all Remove all types of build cache (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon&#39;s time, during which build cache was not used, in Go&#39;s duration format (e.g., &#39;24h&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function buildPruneAsync()
+    public function buildPruneAsync($keep_storage = null, $all = null, $filters = null)
     {
-        return $this->buildPruneAsyncWithHttpInfo()
+        return $this->buildPruneAsyncWithHttpInfo($keep_storage, $all, $filters)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -209,14 +218,17 @@ class ImageApi
      *
      * Delete builder cache
      *
+     * @param  int $keep_storage Amount of disk space in bytes to keep for cache (optional)
+     * @param  bool $all Remove all types of build cache (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon&#39;s time, during which build cache was not used, in Go&#39;s duration format (e.g., &#39;24h&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function buildPruneAsyncWithHttpInfo()
+    public function buildPruneAsyncWithHttpInfo($keep_storage = null, $all = null, $filters = null)
     {
         $returnType = '\Swagger\Client\Model\BuildPruneResponse';
-        $request = $this->buildPruneRequest();
+        $request = $this->buildPruneRequest($keep_storage, $all, $filters);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -258,11 +270,14 @@ class ImageApi
     /**
      * Create request for operation 'buildPrune'
      *
+     * @param  int $keep_storage Amount of disk space in bytes to keep for cache (optional)
+     * @param  bool $all Remove all types of build cache (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon&#39;s time, during which build cache was not used, in Go&#39;s duration format (e.g., &#39;24h&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function buildPruneRequest()
+    protected function buildPruneRequest($keep_storage = null, $all = null, $filters = null)
     {
 
         $resourcePath = '/build/prune';
@@ -272,6 +287,18 @@ class ImageApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        if ($keep_storage !== null) {
+            $queryParams['keep-storage'] = ObjectSerializer::toQueryValue($keep_storage);
+        }
+        // query params
+        if ($all !== null) {
+            $queryParams['all'] = ObjectSerializer::toQueryValue($all);
+        }
+        // query params
+        if ($filters !== null) {
+            $queryParams['filters'] = ObjectSerializer::toQueryValue($filters);
+        }
 
 
         // body params
@@ -371,7 +398,7 @@ class ImageApi
      * @param  int $shmsize Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB. (optional)
      * @param  bool $squash Squash the resulting images layers into a single layer. *(Experimental release only.)* (optional)
      * @param  string $labels Arbitrary key/value labels to set on the image, as a JSON map of string pairs. (optional)
-     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name to which this container should connect to. (optional)
+     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name or ID to which this container should connect to. (optional)
      * @param  string $content_type content_type (optional, default to application/x-tar)
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
@@ -412,7 +439,7 @@ class ImageApi
      * @param  int $shmsize Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB. (optional)
      * @param  bool $squash Squash the resulting images layers into a single layer. *(Experimental release only.)* (optional)
      * @param  string $labels Arbitrary key/value labels to set on the image, as a JSON map of string pairs. (optional)
-     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name to which this container should connect to. (optional)
+     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name or ID to which this container should connect to. (optional)
      * @param  string $content_type (optional, default to application/x-tar)
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
@@ -506,7 +533,7 @@ class ImageApi
      * @param  int $shmsize Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB. (optional)
      * @param  bool $squash Squash the resulting images layers into a single layer. *(Experimental release only.)* (optional)
      * @param  string $labels Arbitrary key/value labels to set on the image, as a JSON map of string pairs. (optional)
-     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name to which this container should connect to. (optional)
+     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name or ID to which this container should connect to. (optional)
      * @param  string $content_type (optional, default to application/x-tar)
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
@@ -551,7 +578,7 @@ class ImageApi
      * @param  int $shmsize Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB. (optional)
      * @param  bool $squash Squash the resulting images layers into a single layer. *(Experimental release only.)* (optional)
      * @param  string $labels Arbitrary key/value labels to set on the image, as a JSON map of string pairs. (optional)
-     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name to which this container should connect to. (optional)
+     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name or ID to which this container should connect to. (optional)
      * @param  string $content_type (optional, default to application/x-tar)
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
@@ -612,7 +639,7 @@ class ImageApi
      * @param  int $shmsize Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB. (optional)
      * @param  bool $squash Squash the resulting images layers into a single layer. *(Experimental release only.)* (optional)
      * @param  string $labels Arbitrary key/value labels to set on the image, as a JSON map of string pairs. (optional)
-     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name to which this container should connect to. (optional)
+     * @param  string $networkmode Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name or ID to which this container should connect to. (optional)
      * @param  string $content_type (optional, default to application/x-tar)
      * @param  string $x_registry_config This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
@@ -1153,17 +1180,18 @@ class ImageApi
      * @param  string $from_src Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image. (optional)
      * @param  string $repo Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image. (optional)
      * @param  string $tag Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled. (optional)
+     * @param  string $message Set commit message for imported image. (optional)
      * @param  string $input_image Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter (optional)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (optional)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function imageCreate($from_image = null, $from_src = null, $repo = null, $tag = null, $input_image = null, $x_registry_auth = null, $platform = '')
+    public function imageCreate($from_image = null, $from_src = null, $repo = null, $tag = null, $message = null, $input_image = null, $x_registry_auth = null, $platform = '')
     {
-        $this->imageCreateWithHttpInfo($from_image, $from_src, $repo, $tag, $input_image, $x_registry_auth, $platform);
+        $this->imageCreateWithHttpInfo($from_image, $from_src, $repo, $tag, $message, $input_image, $x_registry_auth, $platform);
     }
 
     /**
@@ -1175,18 +1203,19 @@ class ImageApi
      * @param  string $from_src Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image. (optional)
      * @param  string $repo Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image. (optional)
      * @param  string $tag Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled. (optional)
+     * @param  string $message Set commit message for imported image. (optional)
      * @param  string $input_image Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter (optional)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (optional)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function imageCreateWithHttpInfo($from_image = null, $from_src = null, $repo = null, $tag = null, $input_image = null, $x_registry_auth = null, $platform = '')
+    public function imageCreateWithHttpInfo($from_image = null, $from_src = null, $repo = null, $tag = null, $message = null, $input_image = null, $x_registry_auth = null, $platform = '')
     {
         $returnType = '';
-        $request = $this->imageCreateRequest($from_image, $from_src, $repo, $tag, $input_image, $x_registry_auth, $platform);
+        $request = $this->imageCreateRequest($from_image, $from_src, $repo, $tag, $message, $input_image, $x_registry_auth, $platform);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1250,16 +1279,17 @@ class ImageApi
      * @param  string $from_src Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image. (optional)
      * @param  string $repo Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image. (optional)
      * @param  string $tag Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled. (optional)
+     * @param  string $message Set commit message for imported image. (optional)
      * @param  string $input_image Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter (optional)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (optional)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreateAsync($from_image = null, $from_src = null, $repo = null, $tag = null, $input_image = null, $x_registry_auth = null, $platform = '')
+    public function imageCreateAsync($from_image = null, $from_src = null, $repo = null, $tag = null, $message = null, $input_image = null, $x_registry_auth = null, $platform = '')
     {
-        return $this->imageCreateAsyncWithHttpInfo($from_image, $from_src, $repo, $tag, $input_image, $x_registry_auth, $platform)
+        return $this->imageCreateAsyncWithHttpInfo($from_image, $from_src, $repo, $tag, $message, $input_image, $x_registry_auth, $platform)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1276,17 +1306,18 @@ class ImageApi
      * @param  string $from_src Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image. (optional)
      * @param  string $repo Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image. (optional)
      * @param  string $tag Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled. (optional)
+     * @param  string $message Set commit message for imported image. (optional)
      * @param  string $input_image Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter (optional)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (optional)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreateAsyncWithHttpInfo($from_image = null, $from_src = null, $repo = null, $tag = null, $input_image = null, $x_registry_auth = null, $platform = '')
+    public function imageCreateAsyncWithHttpInfo($from_image = null, $from_src = null, $repo = null, $tag = null, $message = null, $input_image = null, $x_registry_auth = null, $platform = '')
     {
         $returnType = '';
-        $request = $this->imageCreateRequest($from_image, $from_src, $repo, $tag, $input_image, $x_registry_auth, $platform);
+        $request = $this->imageCreateRequest($from_image, $from_src, $repo, $tag, $message, $input_image, $x_registry_auth, $platform);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1318,14 +1349,15 @@ class ImageApi
      * @param  string $from_src Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image. (optional)
      * @param  string $repo Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image. (optional)
      * @param  string $tag Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled. (optional)
+     * @param  string $message Set commit message for imported image. (optional)
      * @param  string $input_image Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter (optional)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (optional)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (optional)
      * @param  string $platform Platform in the format os[/arch[/variant]] (optional, default to )
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function imageCreateRequest($from_image = null, $from_src = null, $repo = null, $tag = null, $input_image = null, $x_registry_auth = null, $platform = '')
+    protected function imageCreateRequest($from_image = null, $from_src = null, $repo = null, $tag = null, $message = null, $input_image = null, $x_registry_auth = null, $platform = '')
     {
 
         $resourcePath = '/images/create';
@@ -1350,6 +1382,10 @@ class ImageApi
         // query params
         if ($tag !== null) {
             $queryParams['tag'] = ObjectSerializer::toQueryValue($tag);
+        }
+        // query params
+        if ($message !== null) {
+            $queryParams['message'] = ObjectSerializer::toQueryValue($message);
         }
         // query params
         if ($platform !== null) {
@@ -2869,7 +2905,7 @@ class ImageApi
      * List Images
      *
      * @param  bool $all Show all images. Only images from a final layer (no children) are shown by default. (optional, default to false)
-     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
      * @param  bool $digests Show digest information as a &#x60;RepoDigests&#x60; field on each image. (optional, default to false)
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -2888,7 +2924,7 @@ class ImageApi
      * List Images
      *
      * @param  bool $all Show all images. Only images from a final layer (no children) are shown by default. (optional, default to false)
-     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
      * @param  bool $digests Show digest information as a &#x60;RepoDigests&#x60; field on each image. (optional, default to false)
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -2973,7 +3009,7 @@ class ImageApi
      * List Images
      *
      * @param  bool $all Show all images. Only images from a final layer (no children) are shown by default. (optional, default to false)
-     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
      * @param  bool $digests Show digest information as a &#x60;RepoDigests&#x60; field on each image. (optional, default to false)
      *
      * @throws \InvalidArgumentException
@@ -2995,7 +3031,7 @@ class ImageApi
      * List Images
      *
      * @param  bool $all Show all images. Only images from a final layer (no children) are shown by default. (optional, default to false)
-     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
      * @param  bool $digests Show digest information as a &#x60;RepoDigests&#x60; field on each image. (optional, default to false)
      *
      * @throws \InvalidArgumentException
@@ -3047,7 +3083,7 @@ class ImageApi
      * Create request for operation 'imageList'
      *
      * @param  bool $all Show all images. Only images from a final layer (no children) are shown by default. (optional, default to false)
-     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
+     * @param  string $filters A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) (optional)
      * @param  bool $digests Show digest information as a &#x60;RepoDigests&#x60; field on each image. (optional, default to false)
      *
      * @throws \InvalidArgumentException
@@ -3659,7 +3695,7 @@ class ImageApi
      * Push an image
      *
      * @param  string $name Image name or ID. (required)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (required)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (required)
      * @param  string $tag The tag to associate with the image on the registry. (optional)
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -3677,7 +3713,7 @@ class ImageApi
      * Push an image
      *
      * @param  string $name Image name or ID. (required)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (required)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (required)
      * @param  string $tag The tag to associate with the image on the registry. (optional)
      *
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -3748,7 +3784,7 @@ class ImageApi
      * Push an image
      *
      * @param  string $name Image name or ID. (required)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (required)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (required)
      * @param  string $tag The tag to associate with the image on the registry. (optional)
      *
      * @throws \InvalidArgumentException
@@ -3770,7 +3806,7 @@ class ImageApi
      * Push an image
      *
      * @param  string $name Image name or ID. (required)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (required)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (required)
      * @param  string $tag The tag to associate with the image on the registry. (optional)
      *
      * @throws \InvalidArgumentException
@@ -3808,7 +3844,7 @@ class ImageApi
      * Create request for operation 'imagePush'
      *
      * @param  string $name Image name or ID. (required)
-     * @param  string $x_registry_auth A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) (required)
+     * @param  string $x_registry_auth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. (required)
      * @param  string $tag The tag to associate with the image on the registry. (optional)
      *
      * @throws \InvalidArgumentException

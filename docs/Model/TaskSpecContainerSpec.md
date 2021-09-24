@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **labels** | **map[string,string]** | User-defined key/value data. | [optional] 
 **command** | **string[]** | The command to be run in the image. | [optional] 
 **args** | **string[]** | Arguments to the command. | [optional] 
-**hostname** | **string** | The hostname to use for the container, as a valid RFC 1123 hostname. | [optional] 
+**hostname** | **string** | The hostname to use for the container, as a valid [RFC 1123](https://tools.ietf.org/html/rfc1123) hostname. | [optional] 
 **env** | **string[]** | A list of environment variables in the form &#x60;VAR&#x3D;value&#x60;. | [optional] 
 **dir** | **string** | The working directory for commands to run in. | [optional] 
 **user** | **string** | The user inside the container. | [optional] 

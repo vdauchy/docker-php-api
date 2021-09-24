@@ -1,6 +1,6 @@
 <?php
 /**
- * ContainerInspectResponseState
+ * ContainerState
  *
  * PHP version 5
  *
@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.38) is used. For example, calling `/info` is the same as calling `/v1.38/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.38
+ * OpenAPI spec version: 1.39
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -33,15 +33,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * ContainerInspectResponseState Class Doc Comment
+ * ContainerState Class Doc Comment
  *
  * @category Class
- * @description The state of the container.
+ * @description ContainerState stores container&#39;s running state. It&#39;s part of ContainerJSONBase and will be returned by the \&quot;inspect\&quot; command.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ContainerInspectResponseState implements ModelInterface, ArrayAccess
+class ContainerState implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ContainerInspectResponse_State';
+    protected static $swaggerModelName = 'ContainerState';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -68,7 +68,8 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
         'exit_code' => 'int',
         'error' => 'string',
         'started_at' => 'string',
-        'finished_at' => 'string'
+        'finished_at' => 'string',
+        'health' => '\Swagger\Client\Model\Health'
     ];
 
     /**
@@ -87,7 +88,8 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
         'exit_code' => null,
         'error' => null,
         'started_at' => null,
-        'finished_at' => null
+        'finished_at' => null,
+        'health' => null
     ];
 
     /**
@@ -127,7 +129,8 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
         'exit_code' => 'ExitCode',
         'error' => 'Error',
         'started_at' => 'StartedAt',
-        'finished_at' => 'FinishedAt'
+        'finished_at' => 'FinishedAt',
+        'health' => 'Health'
     ];
 
     /**
@@ -146,7 +149,8 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
         'exit_code' => 'setExitCode',
         'error' => 'setError',
         'started_at' => 'setStartedAt',
-        'finished_at' => 'setFinishedAt'
+        'finished_at' => 'setFinishedAt',
+        'health' => 'setHealth'
     ];
 
     /**
@@ -165,7 +169,8 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
         'exit_code' => 'getExitCode',
         'error' => 'getError',
         'started_at' => 'getStartedAt',
-        'finished_at' => 'getFinishedAt'
+        'finished_at' => 'getFinishedAt',
+        'health' => 'getHealth'
     ];
 
     /**
@@ -264,6 +269,7 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
         $this->container['error'] = isset($data['error']) ? $data['error'] : null;
         $this->container['started_at'] = isset($data['started_at']) ? $data['started_at'] : null;
         $this->container['finished_at'] = isset($data['finished_at']) ? $data['finished_at'] : null;
+        $this->container['health'] = isset($data['health']) ? $data['health'] : null;
     }
 
     /**
@@ -311,7 +317,7 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
     /**
      * Sets status
      *
-     * @param string $status The status of the container. For example, `\"running\"` or `\"exited\"`.
+     * @param string $status String representation of the container state. Can be one of \"created\", \"running\", \"paused\", \"restarting\", \"removing\", \"exited\", or \"dead\".
      *
      * @return $this
      */
@@ -344,7 +350,7 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
     /**
      * Sets running
      *
-     * @param bool $running Whether this container is running.  Note that a running container can be _paused_. The `Running` and `Paused` booleans are not mutually exclusive:  When pausing a container (on Linux), the cgroups freezer is used to suspend all processes in the container. Freezing the process requires the process to be running. As a result, paused containers are both `Running` _and_ `Paused`.  Use the `Status` field instead to determine if a container's state is \"running\".
+     * @param bool $running Whether this container is running.  Note that a running container can be _paused_. The `Running` and `Paused` booleans are not mutually exclusive:  When pausing a container (on Linux), the freezer cgroup is used to suspend all processes in the container. Freezing the process requires the process to be running. As a result, paused containers are both `Running` _and_ `Paused`.  Use the `Status` field instead to determine if a container's state is \"running\".
      *
      * @return $this
      */
@@ -567,6 +573,30 @@ class ContainerInspectResponseState implements ModelInterface, ArrayAccess
     public function setFinishedAt($finished_at)
     {
         $this->container['finished_at'] = $finished_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets health
+     *
+     * @return \Swagger\Client\Model\Health
+     */
+    public function getHealth()
+    {
+        return $this->container['health'];
+    }
+
+    /**
+     * Sets health
+     *
+     * @param \Swagger\Client\Model\Health $health health
+     *
+     * @return $this
+     */
+    public function setHealth($health)
+    {
+        $this->container['health'] = $health;
 
         return $this;
     }

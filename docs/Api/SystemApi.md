@@ -1,6 +1,6 @@
 # Swagger\Client\SystemApi
 
-All URIs are relative to *http://localhost/v1.38*
+All URIs are relative to *http://localhost/v1.39*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -246,7 +246,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **systemVersion**
-> \Swagger\Client\Model\SystemVersionResponse systemVersion()
+> \Swagger\Client\Model\SystemVersion systemVersion()
 
 Get version
 
@@ -277,7 +277,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Swagger\Client\Model\SystemVersionResponse**](../Model/SystemVersionResponse.md)
+[**\Swagger\Client\Model\SystemVersion**](../Model/SystemVersion.md)
 
 ### Authorization
 

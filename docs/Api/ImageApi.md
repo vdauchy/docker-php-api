@@ -1,6 +1,6 @@
 # Swagger\Client\ImageApi
 
-All URIs are relative to *http://localhost/v1.38*
+All URIs are relative to *http://localhost/v1.39*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 # **buildPrune**
-> \Swagger\Client\Model\BuildPruneResponse buildPrune()
+> \Swagger\Client\Model\BuildPruneResponse buildPrune($keep_storage, $all, $filters)
 
 Delete builder cache
 
@@ -36,9 +36,12 @@ $apiInstance = new Swagger\Client\Api\ImageApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
+$keep_storage = 789; // int | Amount of disk space in bytes to keep for cache
+$all = true; // bool | Remove all types of build cache
+$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the list of build cache objects.  Available filters:  - `until=<duration>`: duration relative to daemon's time, during which build cache was not used, in Go's duration format (e.g., '24h') - `id=<id>` - `parent=<id>` - `type=<string>` - `description=<string>` - `inuse` - `shared` - `private`
 
 try {
-    $result = $apiInstance->buildPrune();
+    $result = $apiInstance->buildPrune($keep_storage, $all, $filters);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ImageApi->buildPrune: ', $e->getMessage(), PHP_EOL;
@@ -47,7 +50,12 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **keep_storage** | **int**| Amount of disk space in bytes to keep for cache | [optional]
+ **all** | **bool**| Remove all types of build cache | [optional]
+ **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon&#39;s time, during which build cache was not used, in Go&#39;s duration format (e.g., &#39;24h&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; | [optional]
 
 ### Return type
 
@@ -102,7 +110,7 @@ $buildargs = "buildargs_example"; // string | JSON map of string pairs for build
 $shmsize = 56; // int | Size of `/dev/shm` in bytes. The size must be greater than 0. If omitted the system uses 64MB.
 $squash = true; // bool | Squash the resulting images layers into a single layer. *(Experimental release only.)*
 $labels = "labels_example"; // string | Arbitrary key/value labels to set on the image, as a JSON map of string pairs.
-$networkmode = "networkmode_example"; // string | Sets the networking mode for the run commands during build. Supported standard values are: `bridge`, `host`, `none`, and `container:<name|id>`. Any other value is taken as a custom network's name to which this container should connect to.
+$networkmode = "networkmode_example"; // string | Sets the networking mode for the run commands during build. Supported standard values are: `bridge`, `host`, `none`, and `container:<name|id>`. Any other value is taken as a custom network's name or ID to which this container should connect to.
 $content_type = "application/x-tar"; // string | 
 $x_registry_config = "x_registry_config_example"; // string | This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  ``` {   \"docker.example.com\": {     \"username\": \"janedoe\",     \"password\": \"hunter2\"   },   \"https://index.docker.io/v1/\": {     \"username\": \"mobydock\",     \"password\": \"conta1n3rize14\"   } } ```  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a `https://` prefix and a `/v1/` suffix even though Docker will prefer to use the v2 registry API.
 $platform = ""; // string | Platform in the format os[/arch[/variant]]
@@ -141,7 +149,7 @@ Name | Type | Description  | Notes
  **shmsize** | **int**| Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB. | [optional]
  **squash** | **bool**| Squash the resulting images layers into a single layer. *(Experimental release only.)* | [optional]
  **labels** | **string**| Arbitrary key/value labels to set on the image, as a JSON map of string pairs. | [optional]
- **networkmode** | **string**| Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name to which this container should connect to. | [optional]
+ **networkmode** | **string**| Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network&#39;s name or ID to which this container should connect to. | [optional]
  **content_type** | **string**|  | [optional] [default to application/x-tar]
  **x_registry_config** | **string**| This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. | [optional]
  **platform** | **string**| Platform in the format os[/arch[/variant]] | [optional] [default to ]
@@ -224,7 +232,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **imageCreate**
-> imageCreate($from_image, $from_src, $repo, $tag, $input_image, $x_registry_auth, $platform)
+> imageCreate($from_image, $from_src, $repo, $tag, $message, $input_image, $x_registry_auth, $platform)
 
 Create an image
 
@@ -244,12 +252,13 @@ $from_image = "from_image_example"; // string | Name of the image to pull. The n
 $from_src = "from_src_example"; // string | Source to import. The value may be a URL from which the image can be retrieved or `-` to read the image from the request body. This parameter may only be used when importing an image.
 $repo = "repo_example"; // string | Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image.
 $tag = "tag_example"; // string | Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled.
+$message = "message_example"; // string | Set commit message for imported image.
 $input_image = "input_image_example"; // string | Image content if the value `-` has been specified in fromSrc query parameter
-$x_registry_auth = "x_registry_auth_example"; // string | A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication)
+$x_registry_auth = "x_registry_auth_example"; // string | A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details.
 $platform = ""; // string | Platform in the format os[/arch[/variant]]
 
 try {
-    $apiInstance->imageCreate($from_image, $from_src, $repo, $tag, $input_image, $x_registry_auth, $platform);
+    $apiInstance->imageCreate($from_image, $from_src, $repo, $tag, $message, $input_image, $x_registry_auth, $platform);
 } catch (Exception $e) {
     echo 'Exception when calling ImageApi->imageCreate: ', $e->getMessage(), PHP_EOL;
 }
@@ -264,8 +273,9 @@ Name | Type | Description  | Notes
  **from_src** | **string**| Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image. | [optional]
  **repo** | **string**| Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image. | [optional]
  **tag** | **string**| Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled. | [optional]
+ **message** | **string**| Set commit message for imported image. | [optional]
  **input_image** | **string**| Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter | [optional]
- **x_registry_auth** | **string**| A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) | [optional]
+ **x_registry_auth** | **string**| A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. | [optional]
  **platform** | **string**| Platform in the format os[/arch[/variant]] | [optional] [default to ]
 
 ### Return type
@@ -390,7 +400,7 @@ No authorization required
 
 Export several images
 
-Get a tarball containing all images and metadata for several image repositories.  For each value of the `names` parameter: if it is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned; if it is an image ID, similarly only that image (and its parents) are returned and there would be no names referenced in the 'repositories' file for this image ID.  For details on the format, see [the export image endpoint](#operation/ImageGet).
+Get a tarball containing all images and metadata for several image repositories.  For each value of the `names` parameter: if it is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned; if it is an image ID, similarly only that image (and its parents) are returned and there would be no names referenced in the 'repositories' file for this image ID.  For details on the format, see the [export image endpoint](#operation/ImageGet).
 
 ### Example
 ```php
@@ -550,7 +560,7 @@ $apiInstance = new Swagger\Client\Api\ImageApi(
     new GuzzleHttp\Client()
 );
 $all = false; // bool | Show all images. Only images from a final layer (no children) are shown by default.
-$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the images list. Available filters:  - `before`=(`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`) - `dangling=true` - `label=key` or `label=\"key=value\"` of an image label - `reference`=(`<image-name>[:<tag>]`) - `since`=(`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`)
+$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the images list.  Available filters:  - `before`=(`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`) - `dangling=true` - `label=key` or `label=\"key=value\"` of an image label - `reference`=(`<image-name>[:<tag>]`) - `since`=(`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`)
 $digests = false; // bool | Show digest information as a `RepoDigests` field on each image.
 
 try {
@@ -567,7 +577,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **all** | **bool**| Show all images. Only images from a final layer (no children) are shown by default. | [optional] [default to false]
- **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) | [optional]
+ **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) | [optional]
  **digests** | **bool**| Show digest information as a &#x60;RepoDigests&#x60; field on each image. | [optional] [default to false]
 
 ### Return type
@@ -590,7 +600,7 @@ No authorization required
 
 Import images
 
-Load a set of images and tags into a repository.  For details on the format, see [the export image endpoint](#operation/ImageGet).
+Load a set of images and tags into a repository.  For details on the format, see the [export image endpoint](#operation/ImageGet).
 
 ### Example
 ```php
@@ -700,7 +710,7 @@ $apiInstance = new Swagger\Client\Api\ImageApi(
     new GuzzleHttp\Client()
 );
 $name = "name_example"; // string | Image name or ID.
-$x_registry_auth = "x_registry_auth_example"; // string | A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication)
+$x_registry_auth = "x_registry_auth_example"; // string | A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details.
 $tag = "tag_example"; // string | The tag to associate with the image on the registry.
 
 try {
@@ -716,7 +726,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string**| Image name or ID. |
- **x_registry_auth** | **string**| A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication) |
+ **x_registry_auth** | **string**| A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. |
  **tag** | **string**| The tag to associate with the image on the registry. | [optional]
 
 ### Return type

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **placement** | [**\Swagger\Client\Model\TaskSpecPlacement**](TaskSpecPlacement.md) |  | [optional] 
 **force_update** | **int** | A counter that triggers an update even if no relevant parameters have been changed. | [optional] 
 **runtime** | **string** | Runtime is the type of runtime specified for the task executor. | [optional] 
-**networks** | [**\Swagger\Client\Model\TaskSpecNetworks[]**](TaskSpecNetworks.md) |  | [optional] 
+**networks** | [**\Swagger\Client\Model\NetworkAttachmentConfig[]**](NetworkAttachmentConfig.md) | Specifies which networks the service should attach to. | [optional] 
 **log_driver** | [**\Swagger\Client\Model\TaskSpecLogDriver**](TaskSpecLogDriver.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

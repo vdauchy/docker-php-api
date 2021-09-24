@@ -1,11 +1,9 @@
-# SystemVersionResponseComponents
+# NetworkingConfig
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** |  | 
-**version** | **string** |  | 
-**details** | **object** |  | [optional] 
+**endpoints_config** | [**map[string,\Swagger\Client\Model\EndpointSettings]**](EndpointSettings.md) | A mapping of network name to endpoint configuration for that network. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

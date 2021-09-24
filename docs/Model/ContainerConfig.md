@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **cmd** | **string[]** | Command to run specified as a string or an array of strings. | [optional] 
 **healthcheck** | [**\Swagger\Client\Model\HealthConfig**](HealthConfig.md) |  | [optional] 
 **args_escaped** | **bool** | Command is already escaped (Windows only) | [optional] 
-**image** | **string** | The name of the image to use when creating the container | [optional] 
+**image** | **string** | The name of the image to use when creating the container/ | [optional] 
 **volumes** | **map[string,object]** | An object mapping mount point paths inside the container to empty objects. | [optional] 
 **working_dir** | **string** | The working directory for commands to run in. | [optional] 
 **entrypoint** | **string[]** | The entry point for the container as a string or an array of strings.  If the array consists of exactly one empty string (&#x60;[\&quot;\&quot;]&#x60;) then the entry point is reset to system default (i.e., the entry point used by docker when there is no &#x60;ENTRYPOINT&#x60; instruction in the &#x60;Dockerfile&#x60;). | [optional] 

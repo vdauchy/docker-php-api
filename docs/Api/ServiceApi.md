@@ -1,6 +1,6 @@
 # Swagger\Client\ServiceApi
 
-All URIs are relative to *http://localhost/v1.38*
+All URIs are relative to *http://localhost/v1.39*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,7 +28,7 @@ $apiInstance = new Swagger\Client\Api\ServiceApi(
     new GuzzleHttp\Client()
 );
 $body = new \stdClass; // object | 
-$x_registry_auth = "x_registry_auth_example"; // string | A base64-encoded auth configuration for pulling from private registries. [See the authentication section for details.](#section/Authentication)
+$x_registry_auth = "x_registry_auth_example"; // string | A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details.
 
 try {
     $result = $apiInstance->serviceCreate($body, $x_registry_auth);
@@ -44,7 +44,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**object**](../Model/.md)|  |
- **x_registry_auth** | **string**| A base64-encoded auth configuration for pulling from private registries. [See the authentication section for details.](#section/Authentication) | [optional]
+ **x_registry_auth** | **string**| A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. | [optional]
 
 ### Return type
 
@@ -171,7 +171,7 @@ $apiInstance = new Swagger\Client\Api\ServiceApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the services list. Available filters:  - `id=<service id>` - `label=<service label>` - `mode=[\"replicated\"|\"global\"]` - `name=<service name>`
+$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the services list.  Available filters:  - `id=<service id>` - `label=<service label>` - `mode=[\"replicated\"|\"global\"]` - `name=<service name>`
 
 try {
     $result = $apiInstance->serviceList($filters);
@@ -186,7 +186,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the services list. Available filters:  - &#x60;id&#x3D;&lt;service id&gt;&#x60; - &#x60;label&#x3D;&lt;service label&gt;&#x60; - &#x60;mode&#x3D;[\&quot;replicated\&quot;|\&quot;global\&quot;]&#x60; - &#x60;name&#x3D;&lt;service name&gt;&#x60; | [optional]
+ **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the services list.  Available filters:  - &#x60;id&#x3D;&lt;service id&gt;&#x60; - &#x60;label&#x3D;&lt;service label&gt;&#x60; - &#x60;mode&#x3D;[\&quot;replicated\&quot;|\&quot;global\&quot;]&#x60; - &#x60;name&#x3D;&lt;service name&gt;&#x60; | [optional]
 
 ### Return type
 
@@ -208,7 +208,7 @@ No authorization required
 
 Get service logs
 
-Get `stdout` and `stderr` logs from a service.  **Note**: This endpoint works only for services with the `json-file` or `journald` logging drivers.
+Get `stdout` and `stderr` logs from a service. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `json-file` or `journald` logging drivers.
 
 ### Example
 ```php
@@ -283,10 +283,10 @@ $apiInstance = new Swagger\Client\Api\ServiceApi(
 );
 $id = "id_example"; // string | ID or name of service.
 $body = new \stdClass; // object | 
-$version = 56; // int | The version number of the service object being updated. This is required to avoid conflicting writes.
-$registry_auth_from = "spec"; // string | If the X-Registry-Auth header is not specified, this parameter indicates where to find registry authorization credentials. The valid values are `spec` and `previous-spec`.
+$version = 56; // int | The version number of the service object being updated. This is required to avoid conflicting writes. This version number should be the value as currently set on the service *before* the update. You can find the current version by calling `GET /services/{id}`
+$registry_auth_from = "spec"; // string | If the `X-Registry-Auth` header is not specified, this parameter indicates where to find registry authorization credentials.
 $rollback = "rollback_example"; // string | Set to this parameter to `previous` to cause a server-side rollback to the previous service spec. The supplied spec will be ignored in this case.
-$x_registry_auth = "x_registry_auth_example"; // string | A base64-encoded auth configuration for pulling from private registries. [See the authentication section for details.](#section/Authentication)
+$x_registry_auth = "x_registry_auth_example"; // string | A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details.
 
 try {
     $result = $apiInstance->serviceUpdate($id, $body, $version, $registry_auth_from, $rollback, $x_registry_auth);
@@ -303,10 +303,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of service. |
  **body** | [**object**](../Model/.md)|  |
- **version** | **int**| The version number of the service object being updated. This is required to avoid conflicting writes. |
- **registry_auth_from** | **string**| If the X-Registry-Auth header is not specified, this parameter indicates where to find registry authorization credentials. The valid values are &#x60;spec&#x60; and &#x60;previous-spec&#x60;. | [optional] [default to spec]
+ **version** | **int**| The version number of the service object being updated. This is required to avoid conflicting writes. This version number should be the value as currently set on the service *before* the update. You can find the current version by calling &#x60;GET /services/{id}&#x60; |
+ **registry_auth_from** | **string**| If the &#x60;X-Registry-Auth&#x60; header is not specified, this parameter indicates where to find registry authorization credentials. | [optional] [default to spec]
  **rollback** | **string**| Set to this parameter to &#x60;previous&#x60; to cause a server-side rollback to the previous service spec. The supplied spec will be ignored in this case. | [optional]
- **x_registry_auth** | **string**| A base64-encoded auth configuration for pulling from private registries. [See the authentication section for details.](#section/Authentication) | [optional]
+ **x_registry_auth** | **string**| A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. | [optional]
 
 ### Return type
 

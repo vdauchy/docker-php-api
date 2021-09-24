@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.38) is used. For example, calling `/info` is the same as calling `/v1.38/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.38
+ * OpenAPI spec version: 1.39
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -60,7 +60,9 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'string',
         'advertise_addr' => 'string',
         'data_path_addr' => 'string',
+        'default_addr_pool' => 'string[]',
         'force_new_cluster' => 'bool',
+        'subnet_size' => 'int',
         'spec' => '\Swagger\Client\Model\SwarmSpec'
     ];
 
@@ -73,7 +75,9 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => null,
         'advertise_addr' => null,
         'data_path_addr' => null,
+        'default_addr_pool' => null,
         'force_new_cluster' => null,
+        'subnet_size' => 'uint32',
         'spec' => null
     ];
 
@@ -107,7 +111,9 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'ListenAddr',
         'advertise_addr' => 'AdvertiseAddr',
         'data_path_addr' => 'DataPathAddr',
+        'default_addr_pool' => 'DefaultAddrPool',
         'force_new_cluster' => 'ForceNewCluster',
+        'subnet_size' => 'SubnetSize',
         'spec' => 'Spec'
     ];
 
@@ -120,7 +126,9 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'setListenAddr',
         'advertise_addr' => 'setAdvertiseAddr',
         'data_path_addr' => 'setDataPathAddr',
+        'default_addr_pool' => 'setDefaultAddrPool',
         'force_new_cluster' => 'setForceNewCluster',
+        'subnet_size' => 'setSubnetSize',
         'spec' => 'setSpec'
     ];
 
@@ -133,7 +141,9 @@ class Body1 implements ModelInterface, ArrayAccess
         'listen_addr' => 'getListenAddr',
         'advertise_addr' => 'getAdvertiseAddr',
         'data_path_addr' => 'getDataPathAddr',
+        'default_addr_pool' => 'getDefaultAddrPool',
         'force_new_cluster' => 'getForceNewCluster',
+        'subnet_size' => 'getSubnetSize',
         'spec' => 'getSpec'
     ];
 
@@ -200,7 +210,9 @@ class Body1 implements ModelInterface, ArrayAccess
         $this->container['listen_addr'] = isset($data['listen_addr']) ? $data['listen_addr'] : null;
         $this->container['advertise_addr'] = isset($data['advertise_addr']) ? $data['advertise_addr'] : null;
         $this->container['data_path_addr'] = isset($data['data_path_addr']) ? $data['data_path_addr'] : null;
+        $this->container['default_addr_pool'] = isset($data['default_addr_pool']) ? $data['default_addr_pool'] : null;
         $this->container['force_new_cluster'] = isset($data['force_new_cluster']) ? $data['force_new_cluster'] : null;
+        $this->container['subnet_size'] = isset($data['subnet_size']) ? $data['subnet_size'] : null;
         $this->container['spec'] = isset($data['spec']) ? $data['spec'] : null;
     }
 
@@ -289,13 +301,37 @@ class Body1 implements ModelInterface, ArrayAccess
     /**
      * Sets data_path_addr
      *
-     * @param string $data_path_addr Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`, or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr` is used.  The `DataPathAddr` specifies the address that global scope network drivers will publish towards other nodes in order to reach the containers running on this node. Using this parameter it is possible to separate the container data traffic from the management traffic of the cluster.
+     * @param string $data_path_addr Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`, or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr` is used.  The `DataPathAddr` specifies the address that global scope network drivers will publish towards other  nodes in order to reach the containers running on this node. Using this parameter it is possible to separate the container data traffic from the management traffic of the cluster.
      *
      * @return $this
      */
     public function setDataPathAddr($data_path_addr)
     {
         $this->container['data_path_addr'] = $data_path_addr;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_addr_pool
+     *
+     * @return string[]
+     */
+    public function getDefaultAddrPool()
+    {
+        return $this->container['default_addr_pool'];
+    }
+
+    /**
+     * Sets default_addr_pool
+     *
+     * @param string[] $default_addr_pool Default Address Pool specifies default subnet pools for global scope networks.
+     *
+     * @return $this
+     */
+    public function setDefaultAddrPool($default_addr_pool)
+    {
+        $this->container['default_addr_pool'] = $default_addr_pool;
 
         return $this;
     }
@@ -320,6 +356,30 @@ class Body1 implements ModelInterface, ArrayAccess
     public function setForceNewCluster($force_new_cluster)
     {
         $this->container['force_new_cluster'] = $force_new_cluster;
+
+        return $this;
+    }
+
+    /**
+     * Gets subnet_size
+     *
+     * @return int
+     */
+    public function getSubnetSize()
+    {
+        return $this->container['subnet_size'];
+    }
+
+    /**
+     * Sets subnet_size
+     *
+     * @param int $subnet_size SubnetSize specifies the subnet size of the networks created from the default subnet pool.
+     *
+     * @return $this
+     */
+    public function setSubnetSize($subnet_size)
+    {
+        $this->container['subnet_size'] = $subnet_size;
 
         return $this;
     }

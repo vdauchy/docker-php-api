@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **spec** | [**\Swagger\Client\Model\SwarmSpec**](SwarmSpec.md) |  | [optional] 
 **tls_info** | [**\Swagger\Client\Model\TLSInfo**](TLSInfo.md) |  | [optional] 
 **root_rotation_in_progress** | **bool** | Whether there is currently a root CA rotation in progress for the swarm | [optional] 
+**default_addr_pool** | **string[]** | Default Address Pool specifies default subnet pools for global scope networks. | [optional] 
+**subnet_size** | **int** | SubnetSize specifies the subnet size of the networks created from the default subnet pool. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

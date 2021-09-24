@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.38) is used. For example, calling `/info` is the same as calling `/v1.38/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.38
+ * OpenAPI spec version: 1.39
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -64,7 +64,9 @@ class ClusterInfo implements ModelInterface, ArrayAccess
         'updated_at' => 'string',
         'spec' => '\Swagger\Client\Model\SwarmSpec',
         'tls_info' => '\Swagger\Client\Model\TLSInfo',
-        'root_rotation_in_progress' => 'bool'
+        'root_rotation_in_progress' => 'bool',
+        'default_addr_pool' => 'string[]',
+        'subnet_size' => 'int'
     ];
 
     /**
@@ -79,7 +81,9 @@ class ClusterInfo implements ModelInterface, ArrayAccess
         'updated_at' => 'dateTime',
         'spec' => null,
         'tls_info' => null,
-        'root_rotation_in_progress' => null
+        'root_rotation_in_progress' => null,
+        'default_addr_pool' => 'CIDR',
+        'subnet_size' => 'uint32'
     ];
 
     /**
@@ -115,7 +119,9 @@ class ClusterInfo implements ModelInterface, ArrayAccess
         'updated_at' => 'UpdatedAt',
         'spec' => 'Spec',
         'tls_info' => 'TLSInfo',
-        'root_rotation_in_progress' => 'RootRotationInProgress'
+        'root_rotation_in_progress' => 'RootRotationInProgress',
+        'default_addr_pool' => 'DefaultAddrPool',
+        'subnet_size' => 'SubnetSize'
     ];
 
     /**
@@ -130,7 +136,9 @@ class ClusterInfo implements ModelInterface, ArrayAccess
         'updated_at' => 'setUpdatedAt',
         'spec' => 'setSpec',
         'tls_info' => 'setTlsInfo',
-        'root_rotation_in_progress' => 'setRootRotationInProgress'
+        'root_rotation_in_progress' => 'setRootRotationInProgress',
+        'default_addr_pool' => 'setDefaultAddrPool',
+        'subnet_size' => 'setSubnetSize'
     ];
 
     /**
@@ -145,7 +153,9 @@ class ClusterInfo implements ModelInterface, ArrayAccess
         'updated_at' => 'getUpdatedAt',
         'spec' => 'getSpec',
         'tls_info' => 'getTlsInfo',
-        'root_rotation_in_progress' => 'getRootRotationInProgress'
+        'root_rotation_in_progress' => 'getRootRotationInProgress',
+        'default_addr_pool' => 'getDefaultAddrPool',
+        'subnet_size' => 'getSubnetSize'
     ];
 
     /**
@@ -215,6 +225,8 @@ class ClusterInfo implements ModelInterface, ArrayAccess
         $this->container['spec'] = isset($data['spec']) ? $data['spec'] : null;
         $this->container['tls_info'] = isset($data['tls_info']) ? $data['tls_info'] : null;
         $this->container['root_rotation_in_progress'] = isset($data['root_rotation_in_progress']) ? $data['root_rotation_in_progress'] : null;
+        $this->container['default_addr_pool'] = isset($data['default_addr_pool']) ? $data['default_addr_pool'] : null;
+        $this->container['subnet_size'] = isset($data['subnet_size']) ? $data['subnet_size'] : null;
     }
 
     /**
@@ -225,6 +237,10 @@ class ClusterInfo implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['subnet_size']) && ($this->container['subnet_size'] > 29)) {
+            $invalidProperties[] = "invalid value for 'subnet_size', must be smaller than or equal to 29.";
+        }
 
         return $invalidProperties;
     }
@@ -405,6 +421,59 @@ class ClusterInfo implements ModelInterface, ArrayAccess
     public function setRootRotationInProgress($root_rotation_in_progress)
     {
         $this->container['root_rotation_in_progress'] = $root_rotation_in_progress;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_addr_pool
+     *
+     * @return string[]
+     */
+    public function getDefaultAddrPool()
+    {
+        return $this->container['default_addr_pool'];
+    }
+
+    /**
+     * Sets default_addr_pool
+     *
+     * @param string[] $default_addr_pool Default Address Pool specifies default subnet pools for global scope networks.
+     *
+     * @return $this
+     */
+    public function setDefaultAddrPool($default_addr_pool)
+    {
+        $this->container['default_addr_pool'] = $default_addr_pool;
+
+        return $this;
+    }
+
+    /**
+     * Gets subnet_size
+     *
+     * @return int
+     */
+    public function getSubnetSize()
+    {
+        return $this->container['subnet_size'];
+    }
+
+    /**
+     * Sets subnet_size
+     *
+     * @param int $subnet_size SubnetSize specifies the subnet size of the networks created from the default subnet pool.
+     *
+     * @return $this
+     */
+    public function setSubnetSize($subnet_size)
+    {
+
+        if (!is_null($subnet_size) && ($subnet_size > 29)) {
+            throw new \InvalidArgumentException('invalid value for $subnet_size when calling ClusterInfo., must be smaller than or equal to 29.');
+        }
+
+        $this->container['subnet_size'] = $subnet_size;
 
         return $this;
     }

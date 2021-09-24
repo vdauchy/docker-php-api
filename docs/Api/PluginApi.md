@@ -1,6 +1,6 @@
 # Swagger\Client\PluginApi
 
-All URIs are relative to *http://localhost/v1.38*
+All URIs are relative to *http://localhost/v1.39*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -319,7 +319,7 @@ $apiInstance = new Swagger\Client\Api\PluginApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the plugin list. Available filters:  - `capability=<capability name>` - `enable=<true>|<false>`
+$filters = "filters_example"; // string | A JSON encoded value of the filters (a `map[string][]string`) to process on the plugin list.  Available filters:  - `capability=<capability name>` - `enable=<true>|<false>`
 
 try {
     $result = $apiInstance->pluginList($filters);
@@ -334,7 +334,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the plugin list. Available filters:  - &#x60;capability&#x3D;&lt;capability name&gt;&#x60; - &#x60;enable&#x3D;&lt;true&gt;|&lt;false&gt;&#x60; | [optional]
+ **filters** | **string**| A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the plugin list.  Available filters:  - &#x60;capability&#x3D;&lt;capability name&gt;&#x60; - &#x60;enable&#x3D;&lt;true&gt;|&lt;false&gt;&#x60; | [optional]
 
 ### Return type
 
@@ -370,7 +370,7 @@ $apiInstance = new Swagger\Client\Api\PluginApi(
 );
 $remote = "remote_example"; // string | Remote reference for plugin to install.  The `:latest` tag is optional, and is used as the default if omitted.
 $name = "name_example"; // string | Local name for the pulled plugin.  The `:latest` tag is optional, and is used as the default if omitted.
-$x_registry_auth = "x_registry_auth_example"; // string | A base64-encoded auth configuration to use when pulling a plugin from a registry. [See the authentication section for details.](#section/Authentication)
+$x_registry_auth = "x_registry_auth_example"; // string | A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details.
 $body = array(new \Swagger\Client\Model\Body()); // \Swagger\Client\Model\Body[] | 
 
 try {
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **remote** | **string**| Remote reference for plugin to install.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. |
  **name** | **string**| Local name for the pulled plugin.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. | [optional]
- **x_registry_auth** | **string**| A base64-encoded auth configuration to use when pulling a plugin from a registry. [See the authentication section for details.](#section/Authentication) | [optional]
+ **x_registry_auth** | **string**| A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. | [optional]
  **body** | [**\Swagger\Client\Model\Body[]**](../Model/Body.md)|  | [optional]
 
 ### Return type
@@ -518,7 +518,7 @@ $apiInstance = new Swagger\Client\Api\PluginApi(
 );
 $name = "name_example"; // string | The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
 $remote = "remote_example"; // string | Remote reference to upgrade to.  The `:latest` tag is optional, and is used as the default if omitted.
-$x_registry_auth = "x_registry_auth_example"; // string | A base64-encoded auth configuration to use when pulling a plugin from a registry. [See the authentication section for details.](#section/Authentication)
+$x_registry_auth = "x_registry_auth_example"; // string | A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details.
 $body = array(new \Swagger\Client\Model\Body()); // \Swagger\Client\Model\Body[] | 
 
 try {
@@ -535,7 +535,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string**| The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. |
  **remote** | **string**| Remote reference to upgrade to.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. |
- **x_registry_auth** | **string**| A base64-encoded auth configuration to use when pulling a plugin from a registry. [See the authentication section for details.](#section/Authentication) | [optional]
+ **x_registry_auth** | **string**| A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. | [optional]
  **body** | [**\Swagger\Client\Model\Body[]**](../Model/Body.md)|  | [optional]
 
 ### Return type

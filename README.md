@@ -1,9 +1,9 @@
 # SwaggerClient-php
-The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.38) is used. For example, calling `/info` is the same as calling `/v1.38/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
 
 This PHP package is automatically generated by the [Swagger Codegen](https://github.com/swagger-api/swagger-codegen) project:
 
-- API version: 1.38
+- API version: 1.39
 - Build package: io.swagger.codegen.languages.PhpClientCodegen
 
 ## Requirements
@@ -75,7 +75,7 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/v1.38*
+All URIs are relative to *http://localhost/v1.39*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -109,7 +109,6 @@ Class | Method | HTTP request | Description
 *ContainerApi* | [**containerUpdate**](docs/Api/ContainerApi.md#containerupdate) | **POST** /containers/{id}/update | Update a container
 *ContainerApi* | [**containerWait**](docs/Api/ContainerApi.md#containerwait) | **POST** /containers/{id}/wait | Wait for a container
 *ContainerApi* | [**putContainerArchive**](docs/Api/ContainerApi.md#putcontainerarchive) | **PUT** /containers/{id}/archive | Extract an archive of files or folders to a directory in a container
-*DefaultApi* | [**taskLogs**](docs/Api/DefaultApi.md#tasklogs) | **GET** /tasks/{id}/logs | Get task logs
 *DistributionApi* | [**distributionInspect**](docs/Api/DistributionApi.md#distributioninspect) | **GET** /distribution/{name}/json | Get image information from the registry
 *ExecApi* | [**containerExec**](docs/Api/ExecApi.md#containerexec) | **POST** /containers/{id}/exec | Create an exec instance
 *ExecApi* | [**execInspect**](docs/Api/ExecApi.md#execinspect) | **GET** /exec/{id}/json | Inspect an exec instance
@@ -179,6 +178,7 @@ Class | Method | HTTP request | Description
 *SystemApi* | [**systemVersion**](docs/Api/SystemApi.md#systemversion) | **GET** /version | Get version
 *TaskApi* | [**taskInspect**](docs/Api/TaskApi.md#taskinspect) | **GET** /tasks/{id} | Inspect a task
 *TaskApi* | [**taskList**](docs/Api/TaskApi.md#tasklist) | **GET** /tasks | List tasks
+*TaskApi* | [**taskLogs**](docs/Api/TaskApi.md#tasklogs) | **GET** /tasks/{id}/logs | Get task logs
 *VolumeApi* | [**volumeCreate**](docs/Api/VolumeApi.md#volumecreate) | **POST** /volumes/create | Create a volume
 *VolumeApi* | [**volumeDelete**](docs/Api/VolumeApi.md#volumedelete) | **DELETE** /volumes/{name} | Remove a volume
 *VolumeApi* | [**volumeInspect**](docs/Api/VolumeApi.md#volumeinspect) | **GET** /volumes/{name} | Inspect a volume
@@ -194,6 +194,7 @@ Class | Method | HTTP request | Description
  - [Body1](docs/Model/Body1.md)
  - [Body2](docs/Model/Body2.md)
  - [Body3](docs/Model/Body3.md)
+ - [BuildCache](docs/Model/BuildCache.md)
  - [BuildInfo](docs/Model/BuildInfo.md)
  - [BuildPruneResponse](docs/Model/BuildPruneResponse.md)
  - [ClusterInfo](docs/Model/ClusterInfo.md)
@@ -206,8 +207,8 @@ Class | Method | HTTP request | Description
  - [ContainerConfig](docs/Model/ContainerConfig.md)
  - [ContainerCreateResponse](docs/Model/ContainerCreateResponse.md)
  - [ContainerInspectResponse](docs/Model/ContainerInspectResponse.md)
- - [ContainerInspectResponseState](docs/Model/ContainerInspectResponseState.md)
  - [ContainerPruneResponse](docs/Model/ContainerPruneResponse.md)
+ - [ContainerState](docs/Model/ContainerState.md)
  - [ContainerSummary](docs/Model/ContainerSummary.md)
  - [ContainerSummaryInner](docs/Model/ContainerSummaryInner.md)
  - [ContainerSummaryInnerHostConfig](docs/Model/ContainerSummaryInnerHostConfig.md)
@@ -238,7 +239,9 @@ Class | Method | HTTP request | Description
  - [GenericResourcesInnerDiscreteResourceSpec](docs/Model/GenericResourcesInnerDiscreteResourceSpec.md)
  - [GenericResourcesInnerNamedResourceSpec](docs/Model/GenericResourcesInnerNamedResourceSpec.md)
  - [GraphDriverData](docs/Model/GraphDriverData.md)
+ - [Health](docs/Model/Health.md)
  - [HealthConfig](docs/Model/HealthConfig.md)
+ - [HealthcheckResult](docs/Model/HealthcheckResult.md)
  - [HistoryResponseItem](docs/Model/HistoryResponseItem.md)
  - [HostConfig](docs/Model/HostConfig.md)
  - [HostConfigLogConfig](docs/Model/HostConfigLogConfig.md)
@@ -264,11 +267,13 @@ Class | Method | HTTP request | Description
  - [MountVolumeOptions](docs/Model/MountVolumeOptions.md)
  - [MountVolumeOptionsDriverConfig](docs/Model/MountVolumeOptionsDriverConfig.md)
  - [Network](docs/Model/Network.md)
+ - [NetworkAttachmentConfig](docs/Model/NetworkAttachmentConfig.md)
  - [NetworkConfig](docs/Model/NetworkConfig.md)
  - [NetworkContainer](docs/Model/NetworkContainer.md)
  - [NetworkCreateResponse](docs/Model/NetworkCreateResponse.md)
  - [NetworkPruneResponse](docs/Model/NetworkPruneResponse.md)
  - [NetworkSettings](docs/Model/NetworkSettings.md)
+ - [NetworkingConfig](docs/Model/NetworkingConfig.md)
  - [Node](docs/Model/Node.md)
  - [NodeDescription](docs/Model/NodeDescription.md)
  - [NodeSpec](docs/Model/NodeSpec.md)
@@ -335,9 +340,9 @@ Class | Method | HTTP request | Description
  - [SystemEventsResponse](docs/Model/SystemEventsResponse.md)
  - [SystemEventsResponseActor](docs/Model/SystemEventsResponseActor.md)
  - [SystemInfo](docs/Model/SystemInfo.md)
- - [SystemVersionResponse](docs/Model/SystemVersionResponse.md)
- - [SystemVersionResponseComponents](docs/Model/SystemVersionResponseComponents.md)
- - [SystemVersionResponsePlatform](docs/Model/SystemVersionResponsePlatform.md)
+ - [SystemVersion](docs/Model/SystemVersion.md)
+ - [SystemVersionComponents](docs/Model/SystemVersionComponents.md)
+ - [SystemVersionPlatform](docs/Model/SystemVersionPlatform.md)
  - [TLSInfo](docs/Model/TLSInfo.md)
  - [Task](docs/Model/Task.md)
  - [TaskSpec](docs/Model/TaskSpec.md)
@@ -351,7 +356,6 @@ Class | Method | HTTP request | Description
  - [TaskSpecContainerSpecSecrets](docs/Model/TaskSpecContainerSpecSecrets.md)
  - [TaskSpecLogDriver](docs/Model/TaskSpecLogDriver.md)
  - [TaskSpecNetworkAttachmentSpec](docs/Model/TaskSpecNetworkAttachmentSpec.md)
- - [TaskSpecNetworks](docs/Model/TaskSpecNetworks.md)
  - [TaskSpecPlacement](docs/Model/TaskSpecPlacement.md)
  - [TaskSpecPlacementPreferences](docs/Model/TaskSpecPlacementPreferences.md)
  - [TaskSpecPlacementSpread](docs/Model/TaskSpecPlacementSpread.md)

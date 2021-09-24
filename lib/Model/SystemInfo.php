@@ -13,9 +13,9 @@
 /**
  * Docker Engine API
  *
- * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.38) is used. For example, calling `/info` is the same as calling `/v1.38/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
+ * The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.  Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.  # Errors  The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:  ``` {   \"message\": \"page not found\" } ```  # Versioning  The API is usually changed in each release, so API calls are versioned to ensure that clients don't break. To lock to a specific version of the API, you prefix the URL with its version, for example, call `/v1.30/info` to use the v1.30 version of the `/info` endpoint. If the API version specified in the URL is not supported by the daemon, a HTTP `400 Bad Request` error message is returned.  If you omit the version-prefix, the current version of the API (v1.39) is used. For example, calling `/info` is the same as calling `/v1.39/info`. Using the API without a version-prefix is deprecated and will be removed in a future release.  Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.  The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer daemons.   # Authentication  Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5) (JSON) string with the following structure:  ``` {   \"username\": \"string\",   \"password\": \"string\",   \"email\": \"string\",   \"serveraddress\": \"string\" } ```  The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.  If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:  ``` {   \"identitytoken\": \"9cbaf023786cd7...\" } ```
  *
- * OpenAPI spec version: 1.38
+ * OpenAPI spec version: 1.39
  * 
  * Generated by: https://github.com/swagger-api/swagger-codegen.git
  * Swagger Codegen version: 2.4.21
@@ -113,7 +113,9 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'containerd_commit' => '\Swagger\Client\Model\Commit',
         'runc_commit' => '\Swagger\Client\Model\Commit',
         'init_commit' => '\Swagger\Client\Model\Commit',
-        'security_options' => 'string[]'
+        'security_options' => 'string[]',
+        'product_license' => 'string',
+        'warnings' => 'string[]'
     ];
 
     /**
@@ -178,7 +180,9 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'containerd_commit' => null,
         'runc_commit' => null,
         'init_commit' => null,
-        'security_options' => null
+        'security_options' => null,
+        'product_license' => null,
+        'warnings' => null
     ];
 
     /**
@@ -264,7 +268,9 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'containerd_commit' => 'ContainerdCommit',
         'runc_commit' => 'RuncCommit',
         'init_commit' => 'InitCommit',
-        'security_options' => 'SecurityOptions'
+        'security_options' => 'SecurityOptions',
+        'product_license' => 'ProductLicense',
+        'warnings' => 'Warnings'
     ];
 
     /**
@@ -329,7 +335,9 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'containerd_commit' => 'setContainerdCommit',
         'runc_commit' => 'setRuncCommit',
         'init_commit' => 'setInitCommit',
-        'security_options' => 'setSecurityOptions'
+        'security_options' => 'setSecurityOptions',
+        'product_license' => 'setProductLicense',
+        'warnings' => 'setWarnings'
     ];
 
     /**
@@ -394,7 +402,9 @@ class SystemInfo implements ModelInterface, ArrayAccess
         'containerd_commit' => 'getContainerdCommit',
         'runc_commit' => 'getRuncCommit',
         'init_commit' => 'getInitCommit',
-        'security_options' => 'getSecurityOptions'
+        'security_options' => 'getSecurityOptions',
+        'product_license' => 'getProductLicense',
+        'warnings' => 'getWarnings'
     ];
 
     /**
@@ -546,6 +556,8 @@ class SystemInfo implements ModelInterface, ArrayAccess
         $this->container['runc_commit'] = isset($data['runc_commit']) ? $data['runc_commit'] : null;
         $this->container['init_commit'] = isset($data['init_commit']) ? $data['init_commit'] : null;
         $this->container['security_options'] = isset($data['security_options']) ? $data['security_options'] : null;
+        $this->container['product_license'] = isset($data['product_license']) ? $data['product_license'] : null;
+        $this->container['warnings'] = isset($data['warnings']) ? $data['warnings'] : null;
     }
 
     /**
@@ -1522,7 +1534,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
     /**
      * Sets http_proxy
      *
-     * @param string $http_proxy HTTP-proxy configured for the daemon. This value is obtained from the [`HTTP_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.  Containers do not automatically inherit this configuration.
+     * @param string $http_proxy HTTP-proxy configured for the daemon. This value is obtained from the [`HTTP_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable. Credentials ([user info component](https://tools.ietf.org/html/rfc3986#section-3.2.1)) in the proxy URL are masked in the API response.  Containers do not automatically inherit this configuration.
      *
      * @return $this
      */
@@ -1546,7 +1558,7 @@ class SystemInfo implements ModelInterface, ArrayAccess
     /**
      * Sets https_proxy
      *
-     * @param string $https_proxy HTTPS-proxy configured for the daemon. This value is obtained from the [`HTTPS_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.  Containers do not automatically inherit this configuration.
+     * @param string $https_proxy HTTPS-proxy configured for the daemon. This value is obtained from the [`HTTPS_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable. Credentials ([user info component](https://tools.ietf.org/html/rfc3986#section-3.2.1)) in the proxy URL are masked in the API response.  Containers do not automatically inherit this configuration.
      *
      * @return $this
      */
@@ -1970,6 +1982,54 @@ class SystemInfo implements ModelInterface, ArrayAccess
     public function setSecurityOptions($security_options)
     {
         $this->container['security_options'] = $security_options;
+
+        return $this;
+    }
+
+    /**
+     * Gets product_license
+     *
+     * @return string
+     */
+    public function getProductLicense()
+    {
+        return $this->container['product_license'];
+    }
+
+    /**
+     * Sets product_license
+     *
+     * @param string $product_license Reports a summary of the product license on the daemon.  If a commercial license has been applied to the daemon, information such as number of nodes, and expiration are included.
+     *
+     * @return $this
+     */
+    public function setProductLicense($product_license)
+    {
+        $this->container['product_license'] = $product_license;
+
+        return $this;
+    }
+
+    /**
+     * Gets warnings
+     *
+     * @return string[]
+     */
+    public function getWarnings()
+    {
+        return $this->container['warnings'];
+    }
+
+    /**
+     * Sets warnings
+     *
+     * @param string[] $warnings List of warnings / informational messages about missing features, or issues related to the daemon configuration.  These messages can be printed by the client as information to the user.
+     *
+     * @return $this
+     */
+    public function setWarnings($warnings)
+    {
+        $this->container['warnings'] = $warnings;
 
         return $this;
     }

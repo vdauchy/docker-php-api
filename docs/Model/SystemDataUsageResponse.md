@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **images** | [**\Swagger\Client\Model\ImageSummary[]**](ImageSummary.md) |  | [optional] 
 **containers** | [**\Swagger\Client\Model\ContainerSummary[]**](ContainerSummary.md) |  | [optional] 
 **volumes** | [**\Swagger\Client\Model\Volume[]**](Volume.md) |  | [optional] 
+**build_cache** | [**\Swagger\Client\Model\BuildCache[]**](BuildCache.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
