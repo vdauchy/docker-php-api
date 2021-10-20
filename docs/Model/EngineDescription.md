@@ -1,12 +1,11 @@
-# EngineDescription
+# # EngineDescription
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**engine_version** | **string** |  | [optional] 
-**labels** | **map[string,string]** |  | [optional] 
-**plugins** | [**\Swagger\Client\Model\EngineDescriptionPlugins[]**](EngineDescriptionPlugins.md) |  | [optional] 
+**engine_version** | **string** |  | [optional]
+**labels** | **array<string,string>** |  | [optional]
+**plugins** | [**\OpenAPI\Client\Model\EngineDescriptionPlugins[]**](EngineDescriptionPlugins.md) |  | [optional]
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

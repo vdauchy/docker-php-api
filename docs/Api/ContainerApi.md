@@ -1,62 +1,67 @@
-# Swagger\Client\ContainerApi
+# OpenAPI\Client\ContainerApi
 
-All URIs are relative to *http://localhost/v1.41*
+All URIs are relative to http://localhost/v1.41.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**containerArchive**](ContainerApi.md#containerArchive) | **GET** /containers/{id}/archive | Get an archive of a filesystem resource in a container
-[**containerArchiveInfo**](ContainerApi.md#containerArchiveInfo) | **HEAD** /containers/{id}/archive | Get information about files in a container
-[**containerAttach**](ContainerApi.md#containerAttach) | **POST** /containers/{id}/attach | Attach to a container
-[**containerAttachWebsocket**](ContainerApi.md#containerAttachWebsocket) | **GET** /containers/{id}/attach/ws | Attach to a container via a websocket
-[**containerChanges**](ContainerApi.md#containerChanges) | **GET** /containers/{id}/changes | Get changes on a container’s filesystem
-[**containerCreate**](ContainerApi.md#containerCreate) | **POST** /containers/create | Create a container
-[**containerDelete**](ContainerApi.md#containerDelete) | **DELETE** /containers/{id} | Remove a container
-[**containerExport**](ContainerApi.md#containerExport) | **GET** /containers/{id}/export | Export a container
-[**containerInspect**](ContainerApi.md#containerInspect) | **GET** /containers/{id}/json | Inspect a container
-[**containerKill**](ContainerApi.md#containerKill) | **POST** /containers/{id}/kill | Kill a container
-[**containerList**](ContainerApi.md#containerList) | **GET** /containers/json | List containers
-[**containerLogs**](ContainerApi.md#containerLogs) | **GET** /containers/{id}/logs | Get container logs
-[**containerPause**](ContainerApi.md#containerPause) | **POST** /containers/{id}/pause | Pause a container
-[**containerPrune**](ContainerApi.md#containerPrune) | **POST** /containers/prune | Delete stopped containers
-[**containerRename**](ContainerApi.md#containerRename) | **POST** /containers/{id}/rename | Rename a container
-[**containerResize**](ContainerApi.md#containerResize) | **POST** /containers/{id}/resize | Resize a container TTY
-[**containerRestart**](ContainerApi.md#containerRestart) | **POST** /containers/{id}/restart | Restart a container
-[**containerStart**](ContainerApi.md#containerStart) | **POST** /containers/{id}/start | Start a container
-[**containerStats**](ContainerApi.md#containerStats) | **GET** /containers/{id}/stats | Get container stats based on resource usage
-[**containerStop**](ContainerApi.md#containerStop) | **POST** /containers/{id}/stop | Stop a container
-[**containerTop**](ContainerApi.md#containerTop) | **GET** /containers/{id}/top | List processes running inside a container
-[**containerUnpause**](ContainerApi.md#containerUnpause) | **POST** /containers/{id}/unpause | Unpause a container
-[**containerUpdate**](ContainerApi.md#containerUpdate) | **POST** /containers/{id}/update | Update a container
-[**containerWait**](ContainerApi.md#containerWait) | **POST** /containers/{id}/wait | Wait for a container
-[**putContainerArchive**](ContainerApi.md#putContainerArchive) | **PUT** /containers/{id}/archive | Extract an archive of files or folders to a directory in a container
+[**containerArchive()**](ContainerApi.md#containerArchive) | **GET** /containers/{id}/archive | Get an archive of a filesystem resource in a container
+[**containerArchiveInfo()**](ContainerApi.md#containerArchiveInfo) | **HEAD** /containers/{id}/archive | Get information about files in a container
+[**containerAttach()**](ContainerApi.md#containerAttach) | **POST** /containers/{id}/attach | Attach to a container
+[**containerAttachWebsocket()**](ContainerApi.md#containerAttachWebsocket) | **GET** /containers/{id}/attach/ws | Attach to a container via a websocket
+[**containerChanges()**](ContainerApi.md#containerChanges) | **GET** /containers/{id}/changes | Get changes on a container’s filesystem
+[**containerCreate()**](ContainerApi.md#containerCreate) | **POST** /containers/create | Create a container
+[**containerDelete()**](ContainerApi.md#containerDelete) | **DELETE** /containers/{id} | Remove a container
+[**containerExport()**](ContainerApi.md#containerExport) | **GET** /containers/{id}/export | Export a container
+[**containerInspect()**](ContainerApi.md#containerInspect) | **GET** /containers/{id}/json | Inspect a container
+[**containerKill()**](ContainerApi.md#containerKill) | **POST** /containers/{id}/kill | Kill a container
+[**containerList()**](ContainerApi.md#containerList) | **GET** /containers/json | List containers
+[**containerLogs()**](ContainerApi.md#containerLogs) | **GET** /containers/{id}/logs | Get container logs
+[**containerPause()**](ContainerApi.md#containerPause) | **POST** /containers/{id}/pause | Pause a container
+[**containerPrune()**](ContainerApi.md#containerPrune) | **POST** /containers/prune | Delete stopped containers
+[**containerRename()**](ContainerApi.md#containerRename) | **POST** /containers/{id}/rename | Rename a container
+[**containerResize()**](ContainerApi.md#containerResize) | **POST** /containers/{id}/resize | Resize a container TTY
+[**containerRestart()**](ContainerApi.md#containerRestart) | **POST** /containers/{id}/restart | Restart a container
+[**containerStart()**](ContainerApi.md#containerStart) | **POST** /containers/{id}/start | Start a container
+[**containerStats()**](ContainerApi.md#containerStats) | **GET** /containers/{id}/stats | Get container stats based on resource usage
+[**containerStop()**](ContainerApi.md#containerStop) | **POST** /containers/{id}/stop | Stop a container
+[**containerTop()**](ContainerApi.md#containerTop) | **GET** /containers/{id}/top | List processes running inside a container
+[**containerUnpause()**](ContainerApi.md#containerUnpause) | **POST** /containers/{id}/unpause | Unpause a container
+[**containerUpdate()**](ContainerApi.md#containerUpdate) | **POST** /containers/{id}/update | Update a container
+[**containerWait()**](ContainerApi.md#containerWait) | **POST** /containers/{id}/wait | Wait for a container
+[**putContainerArchive()**](ContainerApi.md#putContainerArchive) | **PUT** /containers/{id}/archive | Extract an archive of files or folders to a directory in a container
 
 
-# **containerArchive**
-> containerArchive($id, $path)
+## `containerArchive()`
+
+```php
+containerArchive($id, $path)
+```
 
 Get an archive of a filesystem resource in a container
 
 Get a tar archive of a resource in the filesystem of container id.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$path = "path_example"; // string | Resource in the container’s filesystem to archive.
+$id = 'id_example'; // string | ID or name of the container
+$path = 'path_example'; // string | Resource in the container’s filesystem to archive.
 
 try {
     $apiInstance->containerArchive($id, $path);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerArchive: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -76,37 +81,44 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/x-tar
+- **Content-Type**: Not defined
+- **Accept**: `application/x-tar`, `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerArchiveInfo**
-> containerArchiveInfo($id, $path)
+## `containerArchiveInfo()`
+
+```php
+containerArchiveInfo($id, $path)
+```
 
 Get information about files in a container
 
 A response header `X-Docker-Container-Path-Stat` is returned, containing a base64 - encoded JSON object with some filesystem header information about the path.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$path = "path_example"; // string | Resource in the container’s filesystem to archive.
+$id = 'id_example'; // string | ID or name of the container
+$path = 'path_example'; // string | Resource in the container’s filesystem to archive.
 
 try {
     $apiInstance->containerArchiveInfo($id, $path);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerArchiveInfo: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -126,30 +138,38 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerAttach**
-> containerAttach($id, $detach_keys, $logs, $stream, $stdin, $stdout, $stderr)
+## `containerAttach()`
+
+```php
+containerAttach($id, $detach_keys, $logs, $stream, $stdin, $stdout, $stderr)
+```
 
 Attach to a container
 
 Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.  Either the `stream` or `logs` parameter must be `true` for this endpoint to do anything.  See the [documentation for the `docker attach` command](/engine/reference/commandline/attach/) for more details.  ### Hijacking  This endpoint hijacks the HTTP connection to transport `stdin`, `stdout`, and `stderr` on the same socket.  This is the response from the daemon for an attach request:  ``` HTTP/1.1 200 OK Content-Type: application/vnd.docker.raw-stream  [STREAM] ```  After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.  To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.  For example, the client sends this request to upgrade the connection:  ``` POST /containers/16253994b7c4/attach?stream=1&stdout=1 HTTP/1.1 Upgrade: tcp Connection: Upgrade ```  The Docker daemon will respond with a `101 UPGRADED` response, and will similarly follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Content-Type: application/vnd.docker.raw-stream Connection: Upgrade Upgrade: tcp  [STREAM] ```  ### Stream format  When the TTY setting is disabled in [`POST /containers/create`](#operation/ContainerCreate), the stream over the hijacked connected is multiplexed to separate out `stdout` and `stderr`. The stream consists of a series of frames, each containing a header and a payload.  The header contains the information which the stream writes (`stdout` or `stderr`). It also contains the size of the associated frame encoded in the last four bytes (`uint32`).  It is encoded on the first eight bytes like this:  ```go header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4} ```  `STREAM_TYPE` can be:  - 0: `stdin` (is written on `stdout`) - 1: `stdout` - 2: `stderr`  `SIZE1, SIZE2, SIZE3, SIZE4` are the four bytes of the `uint32` size encoded as big endian.  Following the header is the payload, which is the specified number of bytes of `STREAM_TYPE`.  The simplest way to implement this protocol is the following:  1. Read 8 bytes. 2. Choose `stdout` or `stderr` depending on the first byte. 3. Extract the frame size from the last four bytes. 4. Read the extracted size and output it on the correct output. 5. Goto 1.  ### Stream format when using a TTY  When the TTY setting is enabled in [`POST /containers/create`](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client's `stdin`.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$detach_keys = "detach_keys_example"; // string | Override the key sequence for detaching a container.Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`.
+$id = 'id_example'; // string | ID or name of the container
+$detach_keys = 'detach_keys_example'; // string | Override the key sequence for detaching a container.Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`.
 $logs = false; // bool | Replay previous logs from the container.  This is useful for attaching to a container that has started and you want to output everything since the container started.  If `stream` is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output.
 $stream = false; // bool | Stream attached streams from the time the request was made onwards.
 $stdin = false; // bool | Attach to `stdin`
@@ -161,7 +181,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerAttach: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -186,28 +205,36 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/vnd.docker.raw-stream
+- **Content-Type**: Not defined
+- **Accept**: `application/vnd.docker.raw-stream`, `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerAttachWebsocket**
-> containerAttachWebsocket($id, $detach_keys, $logs, $stream, $stdin, $stdout, $stderr)
+## `containerAttachWebsocket()`
+
+```php
+containerAttachWebsocket($id, $detach_keys, $logs, $stream, $stdin, $stdout, $stderr)
+```
 
 Attach to a container via a websocket
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$detach_keys = "detach_keys_example"; // string | Override the key sequence for detaching a container.Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,`, or `_`.
+$id = 'id_example'; // string | ID or name of the container
+$detach_keys = 'detach_keys_example'; // string | Override the key sequence for detaching a container.Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,`, or `_`.
 $logs = false; // bool | Return logs
 $stream = false; // bool | Return stream
 $stdin = false; // bool | Attach to `stdin`
@@ -219,7 +246,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerAttachWebsocket: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -244,29 +270,37 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerChanges**
-> \Swagger\Client\Model\ContainerChangeResponseItem[] containerChanges($id)
+## `containerChanges()`
+
+```php
+containerChanges($id): \OpenAPI\Client\Model\ContainerChangeResponseItem[]
+```
 
 Get changes on a container’s filesystem
 
 Returns which files in a container's filesystem have been added, deleted, or modified. The `Kind` of modification can be one of:  - `0`: Modified - `1`: Added - `2`: Deleted
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 
 try {
     $result = $apiInstance->containerChanges($id);
@@ -274,7 +308,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerChanges: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -285,7 +318,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerChangeResponseItem[]**](../Model/ContainerChangeResponseItem.md)
+[**\OpenAPI\Client\Model\ContainerChangeResponseItem[]**](../Model/ContainerChangeResponseItem.md)
 
 ### Authorization
 
@@ -293,28 +326,36 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerCreate**
-> \Swagger\Client\Model\ContainerCreateResponse containerCreate($body, $name)
+## `containerCreate()`
+
+```php
+containerCreate($body, $name): \OpenAPI\Client\Model\ContainerCreateResponse
+```
 
 Create a container
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$body = new \stdClass; // object | Container to create
-$name = "name_example"; // string | Assign the specified name to the container. Must match `/?[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
+$body = new \OpenAPI\Client\Model\UNKNOWN_BASE_TYPE(); // \OpenAPI\Client\Model\UNKNOWN_BASE_TYPE | Container to create
+$name = 'name_example'; // string | Assign the specified name to the container. Must match `/?[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
 try {
     $result = $apiInstance->containerCreate($body, $name);
@@ -322,19 +363,18 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerCreate: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**object**](../Model/.md)| Container to create |
+ **body** | [**\OpenAPI\Client\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)| Container to create |
  **name** | **string**| Assign the specified name to the container. Must match &#x60;/?[a-zA-Z0-9][a-zA-Z0-9_.-]+&#x60;. | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerCreateResponse**](../Model/ContainerCreateResponse.md)
+[**\OpenAPI\Client\Model\ContainerCreateResponse**](../Model/ContainerCreateResponse.md)
 
 ### Authorization
 
@@ -342,27 +382,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/octet-stream
- - **Accept**: application/json
+- **Content-Type**: `application/json`, `application/octet-stream`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerDelete**
-> containerDelete($id, $v, $force, $link)
+## `containerDelete()`
+
+```php
+containerDelete($id, $v, $force, $link)
+```
 
 Remove a container
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 $v = false; // bool | Remove anonymous volumes associated with the container.
 $force = false; // bool | If the container is running, kill it before removing it.
 $link = false; // bool | Remove the specified link associated with the container.
@@ -372,7 +420,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerDelete: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -394,36 +441,43 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerExport**
-> containerExport($id)
+## `containerExport()`
+
+```php
+containerExport($id)
+```
 
 Export a container
 
 Export the contents of a container as a tarball.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 
 try {
     $apiInstance->containerExport($id);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerExport: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -442,29 +496,37 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/octet-stream
+- **Content-Type**: Not defined
+- **Accept**: `application/octet-stream`, `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerInspect**
-> \Swagger\Client\Model\ContainerInspectResponse containerInspect($id, $size)
+## `containerInspect()`
+
+```php
+containerInspect($id, $size): \OpenAPI\Client\Model\ContainerInspectResponse
+```
 
 Inspect a container
 
 Return low-level information about a container.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 $size = false; // bool | Return the size of container as fields `SizeRw` and `SizeRootFs`
 
 try {
@@ -473,7 +535,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerInspect: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -485,7 +546,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerInspectResponse**](../Model/ContainerInspectResponse.md)
+[**\OpenAPI\Client\Model\ContainerInspectResponse**](../Model/ContainerInspectResponse.md)
 
 ### Authorization
 
@@ -493,37 +554,44 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerKill**
-> containerKill($id, $signal)
+## `containerKill()`
+
+```php
+containerKill($id, $signal)
+```
 
 Kill a container
 
 Send a POSIX signal to a container, defaulting to killing to the container.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$signal = "SIGKILL"; // string | Signal to send to the container as an integer or string (e.g. `SIGINT`)
+$id = 'id_example'; // string | ID or name of the container
+$signal = 'SIGKILL'; // string | Signal to send to the container as an integer or string (e.g. `SIGINT`)
 
 try {
     $apiInstance->containerKill($id, $signal);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerKill: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -531,7 +599,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of the container |
- **signal** | **string**| Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;) | [optional] [default to SIGKILL]
+ **signal** | **string**| Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;) | [optional] [default to &#39;SIGKILL&#39;]
 
 ### Return type
 
@@ -543,24 +611,32 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerList**
-> \Swagger\Client\Model\ContainerSummary containerList($all, $limit, $size, $filters)
+## `containerList()`
+
+```php
+containerList($all, $limit, $size, $filters): object[]
+```
 
 List containers
 
 Returns a list of containers. For details on the format, see the [inspect endpoint](#operation/ContainerInspect).  Note that it uses a different, smaller representation of a container than inspecting a single container. For example, the list of linked containers is not propagated .
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -568,7 +644,7 @@ $apiInstance = new Swagger\Client\Api\ContainerApi(
 $all = false; // bool | Return all containers. By default, only running containers are shown.
 $limit = 56; // int | Return this number of most recently created containers, including non-running ones.
 $size = false; // bool | Return the size of container as fields `SizeRw` and `SizeRootFs`.
-$filters = "filters_example"; // string | Filters to process on the container list, encoded as JSON (a `map[string][]string`). For example, `{\"status\": [\"paused\"]}` will only return paused containers.  Available filters:  - `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`) - `before`=(`<container id>` or `<container name>`) - `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`) - `exited=<int>` containers with exit code of `<int>` - `health`=(`starting`|`healthy`|`unhealthy`|`none`) - `id=<ID>` a container's ID - `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only) - `is-task=`(`true`|`false`) - `label=key` or `label=\"key=value\"` of a container label - `name=<name>` a container's name - `network`=(`<network id>` or `<network name>`) - `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`) - `since`=(`<container id>` or `<container name>`) - `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`) - `volume`=(`<volume name>` or `<mount point destination>`)
+$filters = 'filters_example'; // string | Filters to process on the container list, encoded as JSON (a `map[string][]string`). For example, `{\"status\": [\"paused\"]}` will only return paused containers.  Available filters:  - `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`) - `before`=(`<container id>` or `<container name>`) - `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`) - `exited=<int>` containers with exit code of `<int>` - `health`=(`starting`|`healthy`|`unhealthy`|`none`) - `id=<ID>` a container's ID - `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only) - `is-task=`(`true`|`false`) - `label=key` or `label=\"key=value\"` of a container label - `name=<name>` a container's name - `network`=(`<network id>` or `<network name>`) - `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`) - `since`=(`<container id>` or `<container name>`) - `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`) - `volume`=(`<volume name>` or `<mount point destination>`)
 
 try {
     $result = $apiInstance->containerList($all, $limit, $size, $filters);
@@ -576,7 +652,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerList: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -590,7 +665,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerSummary**](../Model/ContainerSummary.md)
+**object[]**
 
 ### Authorization
 
@@ -598,36 +673,44 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerLogs**
-> string containerLogs($id, $follow, $stdout, $stderr, $since, $until, $timestamps, $tail)
+## `containerLogs()`
+
+```php
+containerLogs($id, $follow, $stdout, $stderr, $since, $until, $timestamps, $tail): \SplFileObject
+```
 
 Get container logs
 
 Get `stdout` and `stderr` logs from a container.  Note: This endpoint works only for containers with the `json-file` or `journald` logging driver.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 $follow = false; // bool | Keep connection after returning logs.
 $stdout = false; // bool | Return logs from `stdout`
 $stderr = false; // bool | Return logs from `stderr`
 $since = 0; // int | Only return logs since this time, as a UNIX timestamp
 $until = 0; // int | Only return logs before this time, as a UNIX timestamp
 $timestamps = false; // bool | Add timestamps to every log line
-$tail = "all"; // string | Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
+$tail = 'all'; // string | Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
 
 try {
     $result = $apiInstance->containerLogs($id, $follow, $stdout, $stderr, $since, $until, $timestamps, $tail);
@@ -635,7 +718,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerLogs: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -649,11 +731,11 @@ Name | Type | Description  | Notes
  **since** | **int**| Only return logs since this time, as a UNIX timestamp | [optional] [default to 0]
  **until** | **int**| Only return logs before this time, as a UNIX timestamp | [optional] [default to 0]
  **timestamps** | **bool**| Add timestamps to every log line | [optional] [default to false]
- **tail** | **string**| Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. | [optional] [default to all]
+ **tail** | **string**| Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. | [optional] [default to &#39;all&#39;]
 
 ### Return type
 
-**string**
+**\SplFileObject**
 
 ### Authorization
 
@@ -661,36 +743,43 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerPause**
-> containerPause($id)
+## `containerPause()`
+
+```php
+containerPause($id)
+```
 
 Pause a container
 
 Use the freezer cgroup to suspend all processes in a container.  Traditionally, when suspending a process the `SIGSTOP` signal is used, which is observable by the process being suspended. With the freezer cgroup the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 
 try {
     $apiInstance->containerPause($id);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerPause: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -709,27 +798,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerPrune**
-> \Swagger\Client\Model\ContainerPruneResponse containerPrune($filters)
+## `containerPrune()`
+
+```php
+containerPrune($filters): \OpenAPI\Client\Model\ContainerPruneResponse
+```
 
 Delete stopped containers
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | Filters to process on the prune list, encoded as JSON (a `map[string][]string`).  Available filters: - `until=<timestamp>` Prune containers created before this timestamp. The `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time. - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune containers with (or without, in case `label!=...` is used) the specified labels.
+$filters = 'filters_example'; // string | Filters to process on the prune list, encoded as JSON (a `map[string][]string`).  Available filters: - `until=<timestamp>` Prune containers created before this timestamp. The `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time. - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune containers with (or without, in case `label!=...` is used) the specified labels.
 
 try {
     $result = $apiInstance->containerPrune($filters);
@@ -737,7 +834,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerPrune: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -748,7 +844,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerPruneResponse**](../Model/ContainerPruneResponse.md)
+[**\OpenAPI\Client\Model\ContainerPruneResponse**](../Model/ContainerPruneResponse.md)
 
 ### Authorization
 
@@ -756,35 +852,42 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerRename**
-> containerRename($id, $name)
+## `containerRename()`
+
+```php
+containerRename($id, $name)
+```
 
 Rename a container
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$name = "name_example"; // string | New name for the container
+$id = 'id_example'; // string | ID or name of the container
+$name = 'name_example'; // string | New name for the container
 
 try {
     $apiInstance->containerRename($id, $name);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerRename: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -804,29 +907,37 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerResize**
-> containerResize($id, $h, $w)
+## `containerResize()`
+
+```php
+containerResize($id, $h, $w)
+```
 
 Resize a container TTY
 
 Resize the TTY for a container.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 $h = 56; // int | Height of the TTY session in characters
 $w = 56; // int | Width of the TTY session in characters
 
@@ -835,7 +946,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerResize: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -856,27 +966,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/octet-stream
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerRestart**
-> containerRestart($id, $t)
+## `containerRestart()`
+
+```php
+containerRestart($id, $t)
+```
 
 Restart a container
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 $t = 56; // int | Number of seconds to wait before killing the container
 
 try {
@@ -884,7 +1002,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerRestart: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -904,35 +1021,42 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerStart**
-> containerStart($id, $detach_keys)
+## `containerStart()`
+
+```php
+containerStart($id, $detach_keys)
+```
 
 Start a container
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$detach_keys = "detach_keys_example"; // string | Override the key sequence for detaching a container. Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`.
+$id = 'id_example'; // string | ID or name of the container
+$detach_keys = 'detach_keys_example'; // string | Override the key sequence for detaching a container. Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`.
 
 try {
     $apiInstance->containerStart($id, $detach_keys);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerStart: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -952,29 +1076,37 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerStats**
-> object containerStats($id, $stream, $one_shot)
+## `containerStats()`
+
+```php
+containerStats($id, $stream, $one_shot): object
+```
 
 Get container stats based on resource usage
 
 This endpoint returns a live stream of a container’s resource usage statistics.  The `precpu_stats` is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the `cpu_stats` field.  If either `precpu_stats.online_cpus` or `cpu_stats.online_cpus` is nil then for compatibility with older daemons the length of the corresponding `cpu_usage.percpu_usage` array should be used.  On a cgroup v2 host, the following fields are not set * `blkio_stats`: all fields other than `io_service_bytes_recursive` * `cpu_stats`: `cpu_usage.percpu_usage` * `memory_stats`: `max_usage` and `failcnt` Also, `memory_stats.stats` fields are incompatible with cgroup v1.  To calculate the values shown by the `stats` command of the docker cli tool the following formulas can be used: * used_memory = `memory_stats.usage - memory_stats.stats.cache` * available_memory = `memory_stats.limit` * Memory usage % = `(used_memory / available_memory) * 100.0` * cpu_delta = `cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage` * system_cpu_delta = `cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage` * number_cpus = `lenght(cpu_stats.cpu_usage.percpu_usage)` or `cpu_stats.online_cpus` * CPU usage % = `(cpu_delta / system_cpu_delta) * number_cpus * 100.0`
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 $stream = true; // bool | Stream the output. If false, the stats will be output once and then it will disconnect.
 $one_shot = false; // bool | Only get a single stat instead of waiting for 2 cycles. Must be used with `stream=false`.
 
@@ -984,7 +1116,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerStats: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1005,27 +1136,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerStop**
-> containerStop($id, $t)
+## `containerStop()`
+
+```php
+containerStop($id, $t)
+```
 
 Stop a container
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 $t = 56; // int | Number of seconds to wait before killing the container
 
 try {
@@ -1033,7 +1172,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerStop: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1053,30 +1191,38 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerTop**
-> \Swagger\Client\Model\ContainerTopResponse containerTop($id, $ps_args)
+## `containerTop()`
+
+```php
+containerTop($id, $ps_args): \OpenAPI\Client\Model\ContainerTopResponse
+```
 
 List processes running inside a container
 
 On Unix systems, this is done by running the `ps` command. This endpoint is not supported on Windows.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$ps_args = "-ef"; // string | The arguments to pass to `ps`. For example, `aux`
+$id = 'id_example'; // string | ID or name of the container
+$ps_args = '-ef'; // string | The arguments to pass to `ps`. For example, `aux`
 
 try {
     $result = $apiInstance->containerTop($id, $ps_args);
@@ -1084,7 +1230,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerTop: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1092,11 +1237,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of the container |
- **ps_args** | **string**| The arguments to pass to &#x60;ps&#x60;. For example, &#x60;aux&#x60; | [optional] [default to -ef]
+ **ps_args** | **string**| The arguments to pass to &#x60;ps&#x60;. For example, &#x60;aux&#x60; | [optional] [default to &#39;-ef&#39;]
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerTopResponse**](../Model/ContainerTopResponse.md)
+[**\OpenAPI\Client\Model\ContainerTopResponse**](../Model/ContainerTopResponse.md)
 
 ### Authorization
 
@@ -1104,36 +1249,43 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerUnpause**
-> containerUnpause($id)
+## `containerUnpause()`
+
+```php
+containerUnpause($id)
+```
 
 Unpause a container
 
 Resume a container which has been paused.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
+$id = 'id_example'; // string | ID or name of the container
 
 try {
     $apiInstance->containerUnpause($id);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerUnpause: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1152,30 +1304,38 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerUpdate**
-> \Swagger\Client\Model\ContainerUpdateResponse containerUpdate($id, $update)
+## `containerUpdate()`
+
+```php
+containerUpdate($id, $update): \OpenAPI\Client\Model\ContainerUpdateResponse
+```
 
 Update a container
 
 Change various configuration options of a container without having to recreate it.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$update = new \stdClass; // object | 
+$id = 'id_example'; // string | ID or name of the container
+$update = new \OpenAPI\Client\Model\UNKNOWN_BASE_TYPE(); // \OpenAPI\Client\Model\UNKNOWN_BASE_TYPE
 
 try {
     $result = $apiInstance->containerUpdate($id, $update);
@@ -1183,7 +1343,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerUpdate: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1191,11 +1350,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of the container |
- **update** | [**object**](../Model/.md)|  |
+ **update** | [**\OpenAPI\Client\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerUpdateResponse**](../Model/ContainerUpdateResponse.md)
+[**\OpenAPI\Client\Model\ContainerUpdateResponse**](../Model/ContainerUpdateResponse.md)
 
 ### Authorization
 
@@ -1203,30 +1362,38 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **containerWait**
-> \Swagger\Client\Model\ContainerWaitResponse containerWait($id, $condition)
+## `containerWait()`
+
+```php
+containerWait($id, $condition): \OpenAPI\Client\Model\ContainerWaitResponse
+```
 
 Wait for a container
 
 Block until a container stops, then returns the exit code.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$condition = "not-running"; // string | Wait until a container state reaches the given condition, either 'not-running' (default), 'next-exit', or 'removed'.
+$id = 'id_example'; // string | ID or name of the container
+$condition = 'not-running'; // string | Wait until a container state reaches the given condition, either 'not-running' (default), 'next-exit', or 'removed'.
 
 try {
     $result = $apiInstance->containerWait($id, $condition);
@@ -1234,7 +1401,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->containerWait: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1242,11 +1408,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of the container |
- **condition** | **string**| Wait until a container state reaches the given condition, either &#39;not-running&#39; (default), &#39;next-exit&#39;, or &#39;removed&#39;. | [optional] [default to not-running]
+ **condition** | **string**| Wait until a container state reaches the given condition, either &#39;not-running&#39; (default), &#39;next-exit&#39;, or &#39;removed&#39;. | [optional] [default to &#39;not-running&#39;]
 
 ### Return type
 
-[**\Swagger\Client\Model\ContainerWaitResponse**](../Model/ContainerWaitResponse.md)
+[**\OpenAPI\Client\Model\ContainerWaitResponse**](../Model/ContainerWaitResponse.md)
 
 ### Authorization
 
@@ -1254,40 +1420,47 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **putContainerArchive**
-> putContainerArchive($id, $path, $input_stream, $no_overwrite_dir_non_dir, $copy_uidgid)
+## `putContainerArchive()`
+
+```php
+putContainerArchive($id, $path, $input_stream, $no_overwrite_dir_non_dir, $copy_uidgid)
+```
 
 Extract an archive of files or folders to a directory in a container
 
 Upload a tar archive to be extracted to a path in the filesystem of container id.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\ContainerApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\ContainerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | ID or name of the container
-$path = "path_example"; // string | Path to a directory in the container to extract the archive’s contents into.
-$input_stream = "B"; // string | The input stream must be a tar archive compressed with one of the following algorithms: `identity` (no compression), `gzip`, `bzip2`, or `xz`.
-$no_overwrite_dir_non_dir = "no_overwrite_dir_non_dir_example"; // string | If `1`, `true`, or `True` then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa.
-$copy_uidgid = "copy_uidgid_example"; // string | If `1`, `true`, then it will copy UID/GID maps to the dest file or dir
+$id = 'id_example'; // string | ID or name of the container
+$path = 'path_example'; // string | Path to a directory in the container to extract the archive’s contents into.
+$input_stream = "/path/to/file.txt"; // \SplFileObject | The input stream must be a tar archive compressed with one of the following algorithms: `identity` (no compression), `gzip`, `bzip2`, or `xz`.
+$no_overwrite_dir_non_dir = 'no_overwrite_dir_non_dir_example'; // string | If `1`, `true`, or `True` then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa.
+$copy_uidgid = 'copy_uidgid_example'; // string | If `1`, `true`, then it will copy UID/GID maps to the dest file or dir
 
 try {
     $apiInstance->putContainerArchive($id, $path, $input_stream, $no_overwrite_dir_non_dir, $copy_uidgid);
 } catch (Exception $e) {
     echo 'Exception when calling ContainerApi->putContainerArchive: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1296,7 +1469,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| ID or name of the container |
  **path** | **string**| Path to a directory in the container to extract the archive’s contents into. |
- **input_stream** | **string**| The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;. |
+ **input_stream** | **\SplFileObject****\SplFileObject**| The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;. |
  **no_overwrite_dir_non_dir** | **string**| If &#x60;1&#x60;, &#x60;true&#x60;, or &#x60;True&#x60; then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa. | [optional]
  **copy_uidgid** | **string**| If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir | [optional]
 
@@ -1310,8 +1483,9 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/x-tar, application/octet-stream
- - **Accept**: application/json, text/plain
+- **Content-Type**: `application/x-tar`, `application/octet-stream`
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

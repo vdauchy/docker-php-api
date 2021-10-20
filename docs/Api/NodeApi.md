@@ -1,31 +1,37 @@
-# Swagger\Client\NodeApi
+# OpenAPI\Client\NodeApi
 
-All URIs are relative to *http://localhost/v1.41*
+All URIs are relative to http://localhost/v1.41.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**nodeDelete**](NodeApi.md#nodeDelete) | **DELETE** /nodes/{id} | Delete a node
-[**nodeInspect**](NodeApi.md#nodeInspect) | **GET** /nodes/{id} | Inspect a node
-[**nodeList**](NodeApi.md#nodeList) | **GET** /nodes | List nodes
-[**nodeUpdate**](NodeApi.md#nodeUpdate) | **POST** /nodes/{id}/update | Update a node
+[**nodeDelete()**](NodeApi.md#nodeDelete) | **DELETE** /nodes/{id} | Delete a node
+[**nodeInspect()**](NodeApi.md#nodeInspect) | **GET** /nodes/{id} | Inspect a node
+[**nodeList()**](NodeApi.md#nodeList) | **GET** /nodes | List nodes
+[**nodeUpdate()**](NodeApi.md#nodeUpdate) | **POST** /nodes/{id}/update | Update a node
 
 
-# **nodeDelete**
-> nodeDelete($id, $force)
+## `nodeDelete()`
+
+```php
+nodeDelete($id, $force)
+```
 
 Delete a node
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NodeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NodeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | The ID or name of the node
+$id = 'id_example'; // string | The ID or name of the node
 $force = false; // bool | Force remove a node from the swarm
 
 try {
@@ -33,7 +39,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling NodeApi->nodeDelete: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -53,27 +58,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **nodeInspect**
-> \Swagger\Client\Model\Node nodeInspect($id)
+## `nodeInspect()`
+
+```php
+nodeInspect($id): \OpenAPI\Client\Model\Node
+```
 
 Inspect a node
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NodeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NodeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | The ID or name of the node
+$id = 'id_example'; // string | The ID or name of the node
 
 try {
     $result = $apiInstance->nodeInspect($id);
@@ -81,7 +94,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling NodeApi->nodeInspect: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -92,7 +104,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Node**](../Model/Node.md)
+[**\OpenAPI\Client\Model\Node**](../Model/Node.md)
 
 ### Authorization
 
@@ -100,27 +112,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **nodeList**
-> \Swagger\Client\Model\Node[] nodeList($filters)
+## `nodeList()`
+
+```php
+nodeList($filters): \OpenAPI\Client\Model\Node[]
+```
 
 List nodes
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NodeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NodeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).  Available filters: - `id=<node id>` - `label=<engine label>` - `membership=`(`accepted`|`pending`)` - `name=<node name>` - `node.label=<node label>` - `role=`(`manager`|`worker`)`
+$filters = 'filters_example'; // string | Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).  Available filters: - `id=<node id>` - `label=<engine label>` - `membership=`(`accepted`|`pending`)` - `name=<node name>` - `node.label=<node label>` - `role=`(`manager`|`worker`)`
 
 try {
     $result = $apiInstance->nodeList($filters);
@@ -128,7 +148,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling NodeApi->nodeList: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -139,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Node[]**](../Model/Node.md)
+[**\OpenAPI\Client\Model\Node[]**](../Model/Node.md)
 
 ### Authorization
 
@@ -147,36 +166,43 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **nodeUpdate**
-> nodeUpdate($id, $version, $body)
+## `nodeUpdate()`
+
+```php
+nodeUpdate($id, $version, $body)
+```
 
 Update a node
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NodeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NodeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | The ID of the node
-$version = 789; // int | The version number of the node object being updated. This is required to avoid conflicting writes.
-$body = new \Swagger\Client\Model\NodeSpec(); // \Swagger\Client\Model\NodeSpec | 
+$id = 'id_example'; // string | The ID of the node
+$version = 56; // int | The version number of the node object being updated. This is required to avoid conflicting writes.
+$body = new \OpenAPI\Client\Model\NodeSpec(); // \OpenAPI\Client\Model\NodeSpec
 
 try {
     $apiInstance->nodeUpdate($id, $version, $body);
 } catch (Exception $e) {
     echo 'Exception when calling NodeApi->nodeUpdate: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -185,7 +211,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the node |
  **version** | **int**| The version number of the node object being updated. This is required to avoid conflicting writes. |
- **body** | [**\Swagger\Client\Model\NodeSpec**](../Model/NodeSpec.md)|  | [optional]
+ **body** | [**\OpenAPI\Client\Model\NodeSpec**](../Model/NodeSpec.md)|  | [optional]
 
 ### Return type
 
@@ -197,8 +223,9 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: `application/json`, `text/plain`
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

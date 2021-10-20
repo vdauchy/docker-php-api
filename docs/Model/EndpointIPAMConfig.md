@@ -1,12 +1,11 @@
-# EndpointIPAMConfig
+# # EndpointIPAMConfig
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**i_pv4_address** | **string** |  | [optional] 
-**i_pv6_address** | **string** |  | [optional] 
-**link_local_i_ps** | **string[]** |  | [optional] 
+**ipv4_address** | **string** |  | [optional]
+**ipv6_address** | **string** |  | [optional]
+**link_local_ips** | **string[]** |  | [optional]
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

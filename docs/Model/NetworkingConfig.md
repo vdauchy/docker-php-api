@@ -1,10 +1,9 @@
-# NetworkingConfig
+# # NetworkingConfig
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**endpoints_config** | [**map[string,\Swagger\Client\Model\EndpointSettings]**](EndpointSettings.md) | A mapping of network name to endpoint configuration for that network. | [optional] 
+**endpoints_config** | [**array<string,\OpenAPI\Client\Model\EndpointSettings>**](EndpointSettings.md) | A mapping of network name to endpoint configuration for that network. | [optional]
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

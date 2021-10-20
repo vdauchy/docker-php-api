@@ -14,9 +14,9 @@ $(TEMP_DIR):
 		--rm \
 		--user $(shell id -u):$(shell id -g) \
 		--volume $(shell pwd):/gen \
-		swaggerapi/swagger-codegen-cli generate \
+		openapitools/openapi-generator-cli generate \
 		-i https://docs.docker.com/engine/api/v$(VERSION).yaml \
-		-l php \
+		-g php \
 		-o /gen/$(TEMP_DIR)
 
 .PHONY: generate
@@ -37,7 +37,7 @@ nuke: ## Delete ALL generated files.
 
 .PHONY: import
 import: generate ## Import generated files to project's root.
-	@cp -r $(TEMP_DIR)/SwaggerClient-php/* .
+	@cp -r $(TEMP_DIR)/* .
 	@sed -i 's/GIT_USER_ID/$(GIT_USER)/g' composer.json
 	@sed -i 's/GIT_REPO_ID/$(GIT_REPO)/g' composer.json
 	@sed -i 's/GIT_USER_ID/$(GIT_USER)/g' README.md

@@ -1,32 +1,38 @@
-# Swagger\Client\VolumeApi
+# OpenAPI\Client\VolumeApi
 
-All URIs are relative to *http://localhost/v1.41*
+All URIs are relative to http://localhost/v1.41.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**volumeCreate**](VolumeApi.md#volumeCreate) | **POST** /volumes/create | Create a volume
-[**volumeDelete**](VolumeApi.md#volumeDelete) | **DELETE** /volumes/{name} | Remove a volume
-[**volumeInspect**](VolumeApi.md#volumeInspect) | **GET** /volumes/{name} | Inspect a volume
-[**volumeList**](VolumeApi.md#volumeList) | **GET** /volumes | List volumes
-[**volumePrune**](VolumeApi.md#volumePrune) | **POST** /volumes/prune | Delete unused volumes
+[**volumeCreate()**](VolumeApi.md#volumeCreate) | **POST** /volumes/create | Create a volume
+[**volumeDelete()**](VolumeApi.md#volumeDelete) | **DELETE** /volumes/{name} | Remove a volume
+[**volumeInspect()**](VolumeApi.md#volumeInspect) | **GET** /volumes/{name} | Inspect a volume
+[**volumeList()**](VolumeApi.md#volumeList) | **GET** /volumes | List volumes
+[**volumePrune()**](VolumeApi.md#volumePrune) | **POST** /volumes/prune | Delete unused volumes
 
 
-# **volumeCreate**
-> \Swagger\Client\Model\Volume volumeCreate($volume_config)
+## `volumeCreate()`
+
+```php
+volumeCreate($volume_config): \OpenAPI\Client\Model\Volume
+```
 
 Create a volume
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\VolumeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\VolumeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$volume_config = new \Swagger\Client\Model\VolumeConfig(); // \Swagger\Client\Model\VolumeConfig | Volume configuration
+$volume_config = new \OpenAPI\Client\Model\VolumeConfig(); // \OpenAPI\Client\Model\VolumeConfig
 
 try {
     $result = $apiInstance->volumeCreate($volume_config);
@@ -34,18 +40,17 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling VolumeApi->volumeCreate: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **volume_config** | [**\Swagger\Client\Model\VolumeConfig**](../Model/VolumeConfig.md)| Volume configuration |
+ **volume_config** | [**\OpenAPI\Client\Model\VolumeConfig**](../Model/VolumeConfig.md)|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\Volume**](../Model/Volume.md)
+[**\OpenAPI\Client\Model\Volume**](../Model/Volume.md)
 
 ### Authorization
 
@@ -53,29 +58,37 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **volumeDelete**
-> volumeDelete($name, $force)
+## `volumeDelete()`
+
+```php
+volumeDelete($name, $force)
+```
 
 Remove a volume
 
 Instruct the driver to remove the volume.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\VolumeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\VolumeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$name = "name_example"; // string | Volume name or ID
+$name = 'name_example'; // string | Volume name or ID
 $force = false; // bool | Force the removal of the volume
 
 try {
@@ -83,7 +96,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling VolumeApi->volumeDelete: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -103,27 +115,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **volumeInspect**
-> \Swagger\Client\Model\Volume volumeInspect($name)
+## `volumeInspect()`
+
+```php
+volumeInspect($name): \OpenAPI\Client\Model\Volume
+```
 
 Inspect a volume
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\VolumeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\VolumeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$name = "name_example"; // string | Volume name or ID
+$name = 'name_example'; // string | Volume name or ID
 
 try {
     $result = $apiInstance->volumeInspect($name);
@@ -131,7 +151,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling VolumeApi->volumeInspect: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -142,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Volume**](../Model/Volume.md)
+[**\OpenAPI\Client\Model\Volume**](../Model/Volume.md)
 
 ### Authorization
 
@@ -150,27 +169,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **volumeList**
-> \Swagger\Client\Model\VolumeListResponse volumeList($filters)
+## `volumeList()`
+
+```php
+volumeList($filters): \OpenAPI\Client\Model\VolumeListResponse
+```
 
 List volumes
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\VolumeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\VolumeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | JSON encoded value of the filters (a `map[string][]string`) to process on the volumes list. Available filters:  - `dangling=<boolean>` When set to `true` (or `1`), returns all    volumes that are not in use by a container. When set to `false`    (or `0`), only volumes that are in use by one or more    containers are returned. - `driver=<volume-driver-name>` Matches volumes based on their driver. - `label=<key>` or `label=<key>:<value>` Matches volumes based on    the presence of a `label` alone or a `label` and a value. - `name=<volume-name>` Matches all or part of a volume name.
+$filters = 'filters_example'; // string | JSON encoded value of the filters (a `map[string][]string`) to process on the volumes list. Available filters:  - `dangling=<boolean>` When set to `true` (or `1`), returns all    volumes that are not in use by a container. When set to `false`    (or `0`), only volumes that are in use by one or more    containers are returned. - `driver=<volume-driver-name>` Matches volumes based on their driver. - `label=<key>` or `label=<key>:<value>` Matches volumes based on    the presence of a `label` alone or a `label` and a value. - `name=<volume-name>` Matches all or part of a volume name.
 
 try {
     $result = $apiInstance->volumeList($filters);
@@ -178,7 +205,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling VolumeApi->volumeList: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -189,7 +215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\VolumeListResponse**](../Model/VolumeListResponse.md)
+[**\OpenAPI\Client\Model\VolumeListResponse**](../Model/VolumeListResponse.md)
 
 ### Authorization
 
@@ -197,27 +223,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **volumePrune**
-> \Swagger\Client\Model\VolumePruneResponse volumePrune($filters)
+## `volumePrune()`
+
+```php
+volumePrune($filters): \OpenAPI\Client\Model\VolumePruneResponse
+```
 
 Delete unused volumes
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\VolumeApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\VolumeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | Filters to process on the prune list, encoded as JSON (a `map[string][]string`).  Available filters: - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune volumes with (or without, in case `label!=...` is used) the specified labels.
+$filters = 'filters_example'; // string | Filters to process on the prune list, encoded as JSON (a `map[string][]string`).  Available filters: - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune volumes with (or without, in case `label!=...` is used) the specified labels.
 
 try {
     $result = $apiInstance->volumePrune($filters);
@@ -225,7 +259,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling VolumeApi->volumePrune: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -236,7 +269,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\VolumePruneResponse**](../Model/VolumePruneResponse.md)
+[**\OpenAPI\Client\Model\VolumePruneResponse**](../Model/VolumePruneResponse.md)
 
 ### Authorization
 
@@ -244,8 +277,9 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

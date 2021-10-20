@@ -1,34 +1,40 @@
-# Swagger\Client\SwarmApi
+# OpenAPI\Client\SwarmApi
 
-All URIs are relative to *http://localhost/v1.41*
+All URIs are relative to http://localhost/v1.41.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**swarmInit**](SwarmApi.md#swarmInit) | **POST** /swarm/init | Initialize a new swarm
-[**swarmInspect**](SwarmApi.md#swarmInspect) | **GET** /swarm | Inspect swarm
-[**swarmJoin**](SwarmApi.md#swarmJoin) | **POST** /swarm/join | Join an existing swarm
-[**swarmLeave**](SwarmApi.md#swarmLeave) | **POST** /swarm/leave | Leave a swarm
-[**swarmUnlock**](SwarmApi.md#swarmUnlock) | **POST** /swarm/unlock | Unlock a locked manager
-[**swarmUnlockkey**](SwarmApi.md#swarmUnlockkey) | **GET** /swarm/unlockkey | Get the unlock key
-[**swarmUpdate**](SwarmApi.md#swarmUpdate) | **POST** /swarm/update | Update a swarm
+[**swarmInit()**](SwarmApi.md#swarmInit) | **POST** /swarm/init | Initialize a new swarm
+[**swarmInspect()**](SwarmApi.md#swarmInspect) | **GET** /swarm | Inspect swarm
+[**swarmJoin()**](SwarmApi.md#swarmJoin) | **POST** /swarm/join | Join an existing swarm
+[**swarmLeave()**](SwarmApi.md#swarmLeave) | **POST** /swarm/leave | Leave a swarm
+[**swarmUnlock()**](SwarmApi.md#swarmUnlock) | **POST** /swarm/unlock | Unlock a locked manager
+[**swarmUnlockkey()**](SwarmApi.md#swarmUnlockkey) | **GET** /swarm/unlockkey | Get the unlock key
+[**swarmUpdate()**](SwarmApi.md#swarmUpdate) | **POST** /swarm/update | Update a swarm
 
 
-# **swarmInit**
-> string swarmInit($body)
+## `swarmInit()`
+
+```php
+swarmInit($body): string
+```
 
 Initialize a new swarm
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\SwarmApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\SwarmApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$body = new \Swagger\Client\Model\Body1(); // \Swagger\Client\Model\Body1 | 
+$body = new \OpenAPI\Client\Model\InlineObject5(); // \OpenAPI\Client\Model\InlineObject5
 
 try {
     $result = $apiInstance->swarmInit($body);
@@ -36,14 +42,13 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling SwarmApi->swarmInit: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\Body1**](../Model/Body1.md)|  |
+ **body** | [**\OpenAPI\Client\Model\InlineObject5**](../Model/InlineObject5.md)|  |
 
 ### Return type
 
@@ -55,22 +60,30 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: `application/json`, `text/plain`
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **swarmInspect**
-> \Swagger\Client\Model\Swarm swarmInspect()
+## `swarmInspect()`
+
+```php
+swarmInspect(): \OpenAPI\Client\Model\Swarm
+```
 
 Inspect swarm
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\SwarmApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\SwarmApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -82,15 +95,15 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling SwarmApi->swarmInspect: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Swagger\Client\Model\Swarm**](../Model/Swarm.md)
+[**\OpenAPI\Client\Model\Swarm**](../Model/Swarm.md)
 
 ### Authorization
 
@@ -98,41 +111,48 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **swarmJoin**
-> swarmJoin($body)
+## `swarmJoin()`
+
+```php
+swarmJoin($body)
+```
 
 Join an existing swarm
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\SwarmApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\SwarmApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$body = new \Swagger\Client\Model\Body2(); // \Swagger\Client\Model\Body2 | 
+$body = new \OpenAPI\Client\Model\InlineObject6(); // \OpenAPI\Client\Model\InlineObject6
 
 try {
     $apiInstance->swarmJoin($body);
 } catch (Exception $e) {
     echo 'Exception when calling SwarmApi->swarmJoin: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\Body2**](../Model/Body2.md)|  |
+ **body** | [**\OpenAPI\Client\Model\InlineObject6**](../Model/InlineObject6.md)|  |
 
 ### Return type
 
@@ -144,22 +164,30 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: `application/json`, `text/plain`
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **swarmLeave**
-> swarmLeave($force)
+## `swarmLeave()`
+
+```php
+swarmLeave($force)
+```
 
 Leave a swarm
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\SwarmApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\SwarmApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -171,7 +199,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling SwarmApi->swarmLeave: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -190,41 +217,48 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **swarmUnlock**
-> swarmUnlock($body)
+## `swarmUnlock()`
+
+```php
+swarmUnlock($body)
+```
 
 Unlock a locked manager
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\SwarmApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\SwarmApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$body = new \Swagger\Client\Model\Body3(); // \Swagger\Client\Model\Body3 | 
+$body = new \OpenAPI\Client\Model\InlineObject7(); // \OpenAPI\Client\Model\InlineObject7
 
 try {
     $apiInstance->swarmUnlock($body);
 } catch (Exception $e) {
     echo 'Exception when calling SwarmApi->swarmUnlock: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\Body3**](../Model/Body3.md)|  |
+ **body** | [**\OpenAPI\Client\Model\InlineObject7**](../Model/InlineObject7.md)|  |
 
 ### Return type
 
@@ -236,22 +270,30 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **swarmUnlockkey**
-> \Swagger\Client\Model\UnlockKeyResponse swarmUnlockkey()
+## `swarmUnlockkey()`
+
+```php
+swarmUnlockkey(): \OpenAPI\Client\Model\UnlockKeyResponse
+```
 
 Get the unlock key
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\SwarmApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\SwarmApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -263,15 +305,15 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling SwarmApi->swarmUnlockkey: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Swagger\Client\Model\UnlockKeyResponse**](../Model/UnlockKeyResponse.md)
+[**\OpenAPI\Client\Model\UnlockKeyResponse**](../Model/UnlockKeyResponse.md)
 
 ### Authorization
 
@@ -279,46 +321,53 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **swarmUpdate**
-> swarmUpdate($body, $version, $rotate_worker_token, $rotate_manager_token, $rotate_manager_unlock_key)
+## `swarmUpdate()`
+
+```php
+swarmUpdate($version, $body, $rotate_worker_token, $rotate_manager_token, $rotate_manager_unlock_key)
+```
 
 Update a swarm
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\SwarmApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\SwarmApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$body = new \Swagger\Client\Model\SwarmSpec(); // \Swagger\Client\Model\SwarmSpec | 
-$version = 789; // int | The version number of the swarm object being updated. This is required to avoid conflicting writes.
+$version = 56; // int | The version number of the swarm object being updated. This is required to avoid conflicting writes.
+$body = new \OpenAPI\Client\Model\SwarmSpec(); // \OpenAPI\Client\Model\SwarmSpec
 $rotate_worker_token = false; // bool | Rotate the worker join token.
 $rotate_manager_token = false; // bool | Rotate the manager join token.
 $rotate_manager_unlock_key = false; // bool | Rotate the manager unlock key.
 
 try {
-    $apiInstance->swarmUpdate($body, $version, $rotate_worker_token, $rotate_manager_token, $rotate_manager_unlock_key);
+    $apiInstance->swarmUpdate($version, $body, $rotate_worker_token, $rotate_manager_token, $rotate_manager_unlock_key);
 } catch (Exception $e) {
     echo 'Exception when calling SwarmApi->swarmUpdate: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\SwarmSpec**](../Model/SwarmSpec.md)|  |
  **version** | **int**| The version number of the swarm object being updated. This is required to avoid conflicting writes. |
+ **body** | [**\OpenAPI\Client\Model\SwarmSpec**](../Model/SwarmSpec.md)|  |
  **rotate_worker_token** | **bool**| Rotate the worker join token. | [optional] [default to false]
  **rotate_manager_token** | **bool**| Rotate the manager join token. | [optional] [default to false]
  **rotate_manager_unlock_key** | **bool**| Rotate the manager unlock key. | [optional] [default to false]
@@ -333,8 +382,9 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: `application/json`, `text/plain`
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

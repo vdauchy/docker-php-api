@@ -1,42 +1,47 @@
-# Swagger\Client\NetworkApi
+# OpenAPI\Client\NetworkApi
 
-All URIs are relative to *http://localhost/v1.41*
+All URIs are relative to http://localhost/v1.41.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**networkConnect**](NetworkApi.md#networkConnect) | **POST** /networks/{id}/connect | Connect a container to a network
-[**networkCreate**](NetworkApi.md#networkCreate) | **POST** /networks/create | Create a network
-[**networkDelete**](NetworkApi.md#networkDelete) | **DELETE** /networks/{id} | Remove a network
-[**networkDisconnect**](NetworkApi.md#networkDisconnect) | **POST** /networks/{id}/disconnect | Disconnect a container from a network
-[**networkInspect**](NetworkApi.md#networkInspect) | **GET** /networks/{id} | Inspect a network
-[**networkList**](NetworkApi.md#networkList) | **GET** /networks | List networks
-[**networkPrune**](NetworkApi.md#networkPrune) | **POST** /networks/prune | Delete unused networks
+[**networkConnect()**](NetworkApi.md#networkConnect) | **POST** /networks/{id}/connect | Connect a container to a network
+[**networkCreate()**](NetworkApi.md#networkCreate) | **POST** /networks/create | Create a network
+[**networkDelete()**](NetworkApi.md#networkDelete) | **DELETE** /networks/{id} | Remove a network
+[**networkDisconnect()**](NetworkApi.md#networkDisconnect) | **POST** /networks/{id}/disconnect | Disconnect a container from a network
+[**networkInspect()**](NetworkApi.md#networkInspect) | **GET** /networks/{id} | Inspect a network
+[**networkList()**](NetworkApi.md#networkList) | **GET** /networks | List networks
+[**networkPrune()**](NetworkApi.md#networkPrune) | **POST** /networks/prune | Delete unused networks
 
 
-# **networkConnect**
-> networkConnect($id, $container)
+## `networkConnect()`
+
+```php
+networkConnect($id, $container)
+```
 
 Connect a container to a network
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NetworkApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NetworkApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | Network ID or name
-$container = new \Swagger\Client\Model\Container(); // \Swagger\Client\Model\Container | 
+$id = 'id_example'; // string | Network ID or name
+$container = new \OpenAPI\Client\Model\InlineObject3(); // \OpenAPI\Client\Model\InlineObject3
 
 try {
     $apiInstance->networkConnect($id, $container);
 } catch (Exception $e) {
     echo 'Exception when calling NetworkApi->networkConnect: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -44,7 +49,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| Network ID or name |
- **container** | [**\Swagger\Client\Model\Container**](../Model/Container.md)|  |
+ **container** | [**\OpenAPI\Client\Model\InlineObject3**](../Model/InlineObject3.md)|  |
 
 ### Return type
 
@@ -56,27 +61,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json, text/plain
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **networkCreate**
-> \Swagger\Client\Model\NetworkCreateResponse networkCreate($network_config)
+## `networkCreate()`
+
+```php
+networkCreate($network_config): \OpenAPI\Client\Model\NetworkCreateResponse
+```
 
 Create a network
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NetworkApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NetworkApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$network_config = new \Swagger\Client\Model\NetworkConfig(); // \Swagger\Client\Model\NetworkConfig | Network configuration
+$network_config = new \OpenAPI\Client\Model\InlineObject2(); // \OpenAPI\Client\Model\InlineObject2
 
 try {
     $result = $apiInstance->networkCreate($network_config);
@@ -84,18 +97,17 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling NetworkApi->networkCreate: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **network_config** | [**\Swagger\Client\Model\NetworkConfig**](../Model/NetworkConfig.md)| Network configuration |
+ **network_config** | [**\OpenAPI\Client\Model\InlineObject2**](../Model/InlineObject2.md)|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\NetworkCreateResponse**](../Model/NetworkCreateResponse.md)
+[**\OpenAPI\Client\Model\NetworkCreateResponse**](../Model/NetworkCreateResponse.md)
 
 ### Authorization
 
@@ -103,34 +115,41 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **networkDelete**
-> networkDelete($id)
+## `networkDelete()`
+
+```php
+networkDelete($id)
+```
 
 Remove a network
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NetworkApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NetworkApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | Network ID or name
+$id = 'id_example'; // string | Network ID or name
 
 try {
     $apiInstance->networkDelete($id);
 } catch (Exception $e) {
     echo 'Exception when calling NetworkApi->networkDelete: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -149,35 +168,42 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json, text/plain
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **networkDisconnect**
-> networkDisconnect($id, $container)
+## `networkDisconnect()`
+
+```php
+networkDisconnect($id, $container)
+```
 
 Disconnect a container from a network
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NetworkApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NetworkApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | Network ID or name
-$container = new \Swagger\Client\Model\Container1(); // \Swagger\Client\Model\Container1 | 
+$id = 'id_example'; // string | Network ID or name
+$container = new \OpenAPI\Client\Model\InlineObject4(); // \OpenAPI\Client\Model\InlineObject4
 
 try {
     $apiInstance->networkDisconnect($id, $container);
 } catch (Exception $e) {
     echo 'Exception when calling NetworkApi->networkDisconnect: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -185,7 +211,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| Network ID or name |
- **container** | [**\Swagger\Client\Model\Container1**](../Model/Container1.md)|  |
+ **container** | [**\OpenAPI\Client\Model\InlineObject4**](../Model/InlineObject4.md)|  |
 
 ### Return type
 
@@ -197,29 +223,37 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json, text/plain
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **networkInspect**
-> \Swagger\Client\Model\Network networkInspect($id, $verbose, $scope)
+## `networkInspect()`
+
+```php
+networkInspect($id, $verbose, $scope): \OpenAPI\Client\Model\Network
+```
 
 Inspect a network
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NetworkApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NetworkApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = "id_example"; // string | Network ID or name
+$id = 'id_example'; // string | Network ID or name
 $verbose = false; // bool | Detailed inspect output for troubleshooting
-$scope = "scope_example"; // string | Filter the network by scope (swarm, global, or local)
+$scope = 'scope_example'; // string | Filter the network by scope (swarm, global, or local)
 
 try {
     $result = $apiInstance->networkInspect($id, $verbose, $scope);
@@ -227,7 +261,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling NetworkApi->networkInspect: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -240,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Network**](../Model/Network.md)
+[**\OpenAPI\Client\Model\Network**](../Model/Network.md)
 
 ### Authorization
 
@@ -248,29 +281,37 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **networkList**
-> \Swagger\Client\Model\Network[] networkList($filters)
+## `networkList()`
+
+```php
+networkList($filters): \OpenAPI\Client\Model\Network[]
+```
 
 List networks
 
 Returns a list of networks. For details on the format, see the [network inspect endpoint](#operation/NetworkInspect).  Note that it uses a different, smaller representation of a network than inspecting a single network. For example, the list of containers attached to the network is not propagated in API versions 1.28 and up.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NetworkApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NetworkApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | JSON encoded value of the filters (a `map[string][]string`) to process on the networks list.  Available filters:  - `dangling=<boolean>` When set to `true` (or `1`), returns all    networks that are not in use by a container. When set to `false`    (or `0`), only networks that are in use by one or more    containers are returned. - `driver=<driver-name>` Matches a network's driver. - `id=<network-id>` Matches all or part of a network ID. - `label=<key>` or `label=<key>=<value>` of a network label. - `name=<network-name>` Matches all or part of a network name. - `scope=[\"swarm\"|\"global\"|\"local\"]` Filters networks by scope (`swarm`, `global`, or `local`). - `type=[\"custom\"|\"builtin\"]` Filters networks by type. The `custom` keyword returns all user-defined networks.
+$filters = 'filters_example'; // string | JSON encoded value of the filters (a `map[string][]string`) to process on the networks list.  Available filters:  - `dangling=<boolean>` When set to `true` (or `1`), returns all    networks that are not in use by a container. When set to `false`    (or `0`), only networks that are in use by one or more    containers are returned. - `driver=<driver-name>` Matches a network's driver. - `id=<network-id>` Matches all or part of a network ID. - `label=<key>` or `label=<key>=<value>` of a network label. - `name=<network-name>` Matches all or part of a network name. - `scope=[\"swarm\"|\"global\"|\"local\"]` Filters networks by scope (`swarm`, `global`, or `local`). - `type=[\"custom\"|\"builtin\"]` Filters networks by type. The `custom` keyword returns all user-defined networks.
 
 try {
     $result = $apiInstance->networkList($filters);
@@ -278,7 +319,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling NetworkApi->networkList: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -289,7 +329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Network[]**](../Model/Network.md)
+[**\OpenAPI\Client\Model\Network[]**](../Model/Network.md)
 
 ### Authorization
 
@@ -297,27 +337,35 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **networkPrune**
-> \Swagger\Client\Model\NetworkPruneResponse networkPrune($filters)
+## `networkPrune()`
+
+```php
+networkPrune($filters): \OpenAPI\Client\Model\NetworkPruneResponse
+```
 
 Delete unused networks
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Swagger\Client\Api\NetworkApi(
+
+
+$apiInstance = new OpenAPI\Client\Api\NetworkApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filters = "filters_example"; // string | Filters to process on the prune list, encoded as JSON (a `map[string][]string`).  Available filters: - `until=<timestamp>` Prune networks created before this timestamp. The `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time. - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune networks with (or without, in case `label!=...` is used) the specified labels.
+$filters = 'filters_example'; // string | Filters to process on the prune list, encoded as JSON (a `map[string][]string`).  Available filters: - `until=<timestamp>` Prune networks created before this timestamp. The `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time. - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune networks with (or without, in case `label!=...` is used) the specified labels.
 
 try {
     $result = $apiInstance->networkPrune($filters);
@@ -325,7 +373,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling NetworkApi->networkPrune: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -336,7 +383,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\NetworkPruneResponse**](../Model/NetworkPruneResponse.md)
+[**\OpenAPI\Client\Model\NetworkPruneResponse**](../Model/NetworkPruneResponse.md)
 
 ### Authorization
 
@@ -344,8 +391,9 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/plain
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

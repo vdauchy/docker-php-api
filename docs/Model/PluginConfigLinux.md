@@ -1,12 +1,11 @@
-# PluginConfigLinux
+# # PluginConfigLinux
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**capabilities** | **string[]** |  | 
-**allow_all_devices** | **bool** |  | 
-**devices** | [**\Swagger\Client\Model\PluginDevice[]**](PluginDevice.md) |  | 
+**capabilities** | **string[]** |  |
+**allow_all_devices** | **bool** |  |
+**devices** | [**\OpenAPI\Client\Model\PluginDevice[]**](PluginDevice.md) |  |
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
