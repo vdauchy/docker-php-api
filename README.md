@@ -137,6 +137,27 @@ try {
 
 ```
 
+Alternatively if you want to use docker.sock directly you can use this:
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$guzzle = new GuzzleHttp\Client(['curl' => [CURLOPT_UNIX_SOCKET_PATH => '/var/run/docker.sock']);
+
+$apiInstance = new OpenAPI\Client\Api\ConfigApi($guzzle);
+$body = new \OpenAPI\Client\Model\UNKNOWN_BASE_TYPE(); // \OpenAPI\Client\Model\UNKNOWN_BASE_TYPE
+
+try {
+    $result = $apiInstance->configCreate($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ConfigApi->configCreate: ', $e->getMessage(), PHP_EOL;
+}
+
+```
+Do keep in mind that the standard PHP-fpm config uses a non-privileged user for the worker which will not be permitted to connect.
+
 ## API Endpoints
 
 All URIs are relative to *http://localhost/v1.41*
